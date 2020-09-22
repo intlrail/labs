@@ -8,6 +8,7 @@ bin-release/
 DS_Store
 .gitattributes
 .gitignore
+.github/
 .settings/
 assets/
 
