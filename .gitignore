@@ -5,18 +5,16 @@ bin-release/
 [Bb]in/
 
 # Other files and folders
-DS_Store
+**/.DS_Store
 .gitattributes
 .gitignore
 .github/
-.workflows/
 .settings/
 assets/
 
 # Executables
-workflow.yaml
-intlrail.png
-intlrail2.png
+*.ico
+*.png
 *.swf
 *.air
 *.ipa
