@@ -5,7 +5,7 @@ bin-release/
 [Bb]in/
 
 # Other files and folders
-.DS_Store
+DS_Store
 .gitattributes
 .gitignore
 .settings/
