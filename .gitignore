@@ -9,6 +9,7 @@ DS_Store
 .gitattributes
 .gitignore
 .github/
+.workflows/
 .settings/
 assets/
 
