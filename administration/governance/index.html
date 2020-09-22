@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>International Rail Dashcam</title>
+    <style>
+      html, body { margin: 0; height:100%;}
+      canvas { display:block; width:100%;height:100%;}
+    </style>
+  </head>
+  <body>
+    <header>
+    <script src="js/three.js"></script>
+    <script>
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild( renderer.domElement );
+
+{
+  var color = 0xFFFFFF;
+  var intensity = 1;
+  var light = new THREE.DirectionalLight(color, intensity);
+  light.position.set(-1, 2, 4);
+  scene.add(light);
+}
+
+        var geometry = new THREE.BoxGeometry(2, 2, 2);
+        // var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        var texture = new THREE.TextureLoader().load('intlrail.png')
+        var material = new THREE.MeshPhongMaterial( { map: texture } );
+        var cube = new THREE.Mesh( geometry, material );
+        scene.add( cube );
+
+        camera.position.z = 5;
+
+        
+      window.onresize = function(){
+        console.log("Window size: "+window.innerWidth+"x"+window.innerHeight+"px");
+        renderer.setSize(window.innerWidth,window.innerHeight);
+        var aspectRatio = window.innerWidth/window.innerHeight;
+        camera.aspect = aspectRatio;
+        camera.updateProjectionMatrix();
+      }
+
+        var animate = function() {
+            requestAnimationFrame ( animate );
+                
+                cube.rotation.x += 0.01;
+                cube.rotation.y += 0.01;
+
+                renderer.render(scene, camera);
+         };
+
+        animate();
+    </script>
+  </body>
+</html>

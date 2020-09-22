@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <title>IR LIVE INFOBOARD</title>
+        <link href="css/flapper.css" type="text/css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://use.typekit.net/bgw2gie.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script src="transform/dist/jquery.transform-0.9.3.min.js"></script>
+        <script src="src/jquery.flapper.js"></script>
+        <script src="src/flapdemo.js"></script>
+        <script src="css/main.css"></script>
+        <style type="text/css">
+            body {
+                font-family: industry, sans-serif;
+                background: #000;
+                color: #fff;
+            }
+            .page {
+                width: 1000px;
+                margin: 30px auto 0;
+            }
+
+            h1 {
+                text-align: center;
+                font-size: 64px;
+            }
+
+            h4, p {
+                display: inline-flex;
+                padding: 0 2rem;
+            }
+
+            .displays {
+                padding: 30px;
+                border: 10px solid #111;
+                background-color: #111;
+                border-radius: 30px;
+                box-shadow: 0 0 12px 4px #000 inset;
+            }
+
+            .flapper {
+                margin-bottom: 2px;
+                text-align: center;
+            }
+
+            .inputarea {
+                margin: 24px 0;
+            }
+
+            #typesomething,
+            #showme {
+                font-family: Roboto Condensed;
+                font-size: 18px;
+                padding: 14px;
+                background-color: #EEE;
+                color: #333;
+                border: 0;
+                height: 170px;
+            }
+
+            #typesomething {
+                width: 300px;
+            }
+
+            #showme:hover {
+                background-color: #DDD;
+            }
+
+            #showme:active {
+                background-color: #CCC;
+            }
+
+            div.inline {
+                display: inline-block;
+                vertical-align: bottom;
+            }
+
+            div.activity {
+                width: 12px;
+                height: 12px;
+                border-radius: 6px;
+                background-color: #250000;
+                position: relative;
+                top: 33px;
+                left: -15px;
+            }
+
+            div.activity.active {
+                background-color: #f00;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page">
+            <h1 class="display-1">INTERNATIONAL RAIL</h1>
+            <div class="displays">
+                <h4>TRACK 1</h4><p class="pr-4">Departure</p><p class="pr-4">Status</p><p class="pr-4">Gate</p>
+                <div class="activity"></div><input class="display M" />
+                <div class="activity"></div><input class="display M" />
+                <h4>TRACK 2</h4><p class="pr-4">Arrival</p><p class="pr-4">Status</p><p class="pr-4">Gate</p>
+                <div class="activity"></div><input class="display M" />
+                <div class="activity"></div><input class="display M" />
+                <h4>TRACK 3</h4><p class="pr-4">Departure</p><p class="pr-4">Status</p><p class="pr-4">Gate</p>
+                <div class="activity"></div><input class="display M" />
+                <div class="activity"></div><input class="display M" />
+                <h4>TRACK 4</h4>
+                <div class="activity"></div><input class="display M" />
+                <div class="activity"></div><input class="display M" />
+            </div>
+            <div class="inputarea">
+                    <div class="inline"><textarea id="typesomething" placeholder="Type Something Here..." rows="6" cols="20"></textarea></div>
+                <div class="inline"><button id="showme">And Click Here</button></div>
+            </div>
+        </div>
+    </body>
+</html>
+

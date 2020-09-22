@@ -1,0 +1,8 @@
+Credits:
+
+Original artwork by Nicolas Barradeau (https://codepen.io/nicoptere/pen/NgWVVB)
+Modified by International Rail (http://github.com/intlrail)
+
+Disclaimer: 
+
+This is part of an exploratory engineering project started by Brad Kim (https://bradk.im). Tin foil responsibly. ヽ༼ ͠ ͠° ͜ʖ ͠ ͠° ༽ﾉ 

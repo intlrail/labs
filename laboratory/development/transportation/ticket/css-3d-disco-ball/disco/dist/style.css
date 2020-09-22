@@ -1,0 +1,416 @@
+body {
+  background: black;
+}
+
+.disco-ball {
+
+}
+
+.disco-init1 .disco-row:nth-of-type(1n) .cell {
+  height: 20px;
+  transition: height 0.1s 0.1s;
+}
+.disco-init1 .disco-row:nth-of-type(2n) .cell {
+  height: 20px;
+  transition: height 0.1s 0.2s;
+}
+.disco-init1 .disco-row:nth-of-type(3n) .cell {
+  height: 20px;
+  transition: height 0.1s 0.3s;
+}
+.disco-init1 .disco-row:nth-of-type(4n) .cell {
+  height: 20px;
+  transition: height 0.1s 0.4s;
+}
+.disco-init1 .disco-row:nth-of-type(5n) .cell {
+  height: 20px;
+  transition: height 0.1s 0.5s;
+}
+.disco-init1 .disco-row:nth-of-type(6n) .cell {
+  height: 20px;
+  transition: height 0.1s 0.6s;
+}
+.disco-init1 .disco-row:nth-of-type(7n) .cell {
+  height: 20px;
+  transition: height 0.1s 0.7s;
+}
+
+.disco-row {
+  height: 25px;
+  text-align: center;
+}
+
+.cell {
+  border-radius: 20%;
+  display: inline-block;
+  background: white;
+  width: 15px;
+  height: 1px;
+  line-height: 0;
+  transition: height 0.1s;
+}
+
+.disco-init1 .color-1 {
+  background: #ff006f;
+}
+
+.disco-init2 .color-1 {
+  animation: shine1 1s infinite 0.2s;
+}
+@keyframes shine1 {
+  50% {
+    background: #ffb3d4;
+    box-shadow: 0 0 0px 2px #ffb3d4;
+  }
+}
+.disco-init1 .color-2 {
+  background: #ff00dd;
+}
+
+.disco-init2 .color-2 {
+  animation: shine2 1s infinite 0.4s;
+}
+@keyframes shine2 {
+  50% {
+    background: #ffb3f5;
+    box-shadow: 0 0 0px 2px #ffb3f5;
+  }
+}
+.disco-init1 .color-3 {
+  background: #b300ff;
+}
+
+.disco-init2 .color-3 {
+  animation: shine3 1s infinite 0.6s;
+}
+@keyframes shine3 {
+  50% {
+    background: #e8b3ff;
+    box-shadow: 0 0 0px 2px #e8b3ff;
+  }
+}
+.disco-init1 .color-4 {
+  background: #4400ff;
+}
+
+.disco-init2 .color-4 {
+  animation: shine4 1s infinite 0.8s;
+}
+@keyframes shine4 {
+  50% {
+    background: #c7b3ff;
+    box-shadow: 0 0 0px 2px #c7b3ff;
+  }
+}
+.disco-init1 .color-5 {
+  background: #002bff;
+}
+
+.disco-init2 .color-5 {
+  animation: shine5 1s infinite 1s;
+}
+@keyframes shine5 {
+  50% {
+    background: #b3bfff;
+    box-shadow: 0 0 0px 2px #b3bfff;
+  }
+}
+.disco-init1 .color-6 {
+  background: #0099ff;
+}
+
+.disco-init2 .color-6 {
+  animation: shine6 1s infinite 1.2s;
+}
+@keyframes shine6 {
+  50% {
+    background: #b3e0ff;
+    box-shadow: 0 0 0px 2px #b3e0ff;
+  }
+}
+.disco-init1 .color-7 {
+  background: #00fff7;
+}
+
+.disco-init2 .color-7 {
+  animation: shine7 1s infinite 1.4s;
+}
+@keyframes shine7 {
+  50% {
+    background: #b3fffc;
+    box-shadow: 0 0 0px 2px #b3fffc;
+  }
+}
+.disco-init1 .color-8 {
+  background: #00ff88;
+}
+
+.disco-init2 .color-8 {
+  animation: shine8 1s infinite 1.6s;
+}
+@keyframes shine8 {
+  50% {
+    background: #b3ffdb;
+    box-shadow: 0 0 0px 2px #b3ffdb;
+  }
+}
+.disco-init1 .color-9 {
+  background: #00ff1a;
+}
+
+.disco-init2 .color-9 {
+  animation: shine9 1s infinite 1.8s;
+}
+@keyframes shine9 {
+  50% {
+    background: #b3ffba;
+    box-shadow: 0 0 0px 2px #b3ffba;
+  }
+}
+.disco-init1 .color-10 {
+  background: #55ff00;
+}
+
+.disco-init2 .color-10 {
+  animation: shine10 1s infinite 2s;
+}
+@keyframes shine10 {
+  50% {
+    background: #ccffb3;
+    box-shadow: 0 0 0px 2px #ccffb3;
+  }
+}
+.disco-init1 .color-11 {
+  background: #c4ff00;
+}
+
+.disco-init2 .color-11 {
+  animation: shine11 1s infinite 2.2s;
+}
+@keyframes shine11 {
+  50% {
+    background: #edffb3;
+    box-shadow: 0 0 0px 2px #edffb3;
+  }
+}
+.disco-init1 .color-12 {
+  background: #ffcc00;
+}
+
+.disco-init2 .color-12 {
+  animation: shine12 1s infinite 2.4s;
+}
+@keyframes shine12 {
+  50% {
+    background: #fff0b3;
+    box-shadow: 0 0 0px 2px #fff0b3;
+  }
+}
+.disco-init1 .color-13 {
+  background: #ff5e00;
+}
+
+.disco-init2 .color-13 {
+  animation: shine13 1s infinite 2.6s;
+}
+@keyframes shine13 {
+  50% {
+    background: #ffcfb3;
+    box-shadow: 0 0 0px 2px #ffcfb3;
+  }
+}
+.disco-init1 .color-14 {
+  background: #ff0011;
+}
+
+.disco-init2 .color-14 {
+  animation: shine14 1s infinite 2.8s;
+}
+@keyframes shine14 {
+  50% {
+    background: #ffb3b8;
+    box-shadow: 0 0 0px 2px #ffb3b8;
+  }
+}
+.disco-init1 .color-15 {
+  background: #ff0080;
+}
+
+.disco-init2 .color-15 {
+  animation: shine15 1s infinite 3s;
+}
+@keyframes shine15 {
+  50% {
+    background: #ffb3d9;
+    box-shadow: 0 0 0px 2px #ffb3d9;
+  }
+}
+.disco-init1 .color-16 {
+  background: #ff00ee;
+}
+
+.disco-init2 .color-16 {
+  animation: shine16 1s infinite 3.2s;
+}
+@keyframes shine16 {
+  50% {
+    background: #ffb3fa;
+    box-shadow: 0 0 0px 2px #ffb3fa;
+  }
+}
+.disco-init1 .color-17 {
+  background: #a200ff;
+}
+
+.disco-init2 .color-17 {
+  animation: shine17 1s infinite 3.4s;
+}
+@keyframes shine17 {
+  50% {
+    background: #e3b3ff;
+    box-shadow: 0 0 0px 2px #e3b3ff;
+  }
+}
+.disco-init1 .color-18 {
+  background: #3300ff;
+}
+
+.disco-init2 .color-18 {
+  animation: shine18 1s infinite 3.6s;
+}
+@keyframes shine18 {
+  50% {
+    background: #c2b3ff;
+    box-shadow: 0 0 0px 2px #c2b3ff;
+  }
+}
+.disco-init1 .color-19 {
+  background: #003cff;
+}
+
+.disco-init2 .color-19 {
+  animation: shine19 1s infinite 3.8s;
+}
+@keyframes shine19 {
+  50% {
+    background: #b3c4ff;
+    box-shadow: 0 0 0px 2px #b3c4ff;
+  }
+}
+.disco-init1 .color-20 {
+  background: #00aaff;
+}
+
+.disco-init2 .color-20 {
+  animation: shine20 1s infinite 4s;
+}
+@keyframes shine20 {
+  50% {
+    background: #b3e6ff;
+    box-shadow: 0 0 0px 2px #b3e6ff;
+  }
+}
+.disco-init1 .color-21 {
+  background: #00ffe6;
+}
+
+.disco-init2 .color-21 {
+  animation: shine21 1s infinite 4.2s;
+}
+@keyframes shine21 {
+  50% {
+    background: #b3fff7;
+    box-shadow: 0 0 0px 2px #b3fff7;
+  }
+}
+.disco-init1 .color-22 {
+  background: #00ff77;
+}
+
+.disco-init2 .color-22 {
+  animation: shine22 1s infinite 4.4s;
+}
+@keyframes shine22 {
+  50% {
+    background: #b3ffd6;
+    box-shadow: 0 0 0px 2px #b3ffd6;
+  }
+}
+.disco-init1 .color-23 {
+  background: #00ff09;
+}
+
+.disco-init2 .color-23 {
+  animation: shine23 1s infinite 4.6s;
+}
+@keyframes shine23 {
+  50% {
+    background: #b3ffb5;
+    box-shadow: 0 0 0px 2px #b3ffb5;
+  }
+}
+.disco-init1 .color-24 {
+  background: #66ff00;
+}
+
+.disco-init2 .color-24 {
+  animation: shine24 1s infinite 4.8s;
+}
+@keyframes shine24 {
+  50% {
+    background: #d1ffb3;
+    box-shadow: 0 0 0px 2px #d1ffb3;
+  }
+}
+.disco-init1 .color-25 {
+  background: #d5ff00;
+}
+
+.disco-init2 .color-25 {
+  animation: shine25 1s infinite 5s;
+}
+@keyframes shine25 {
+  50% {
+    background: #f2ffb3;
+    box-shadow: 0 0 0px 2px #f2ffb3;
+  }
+}
+.disco-init1 .color-26 {
+  background: #ffbb00;
+}
+
+.disco-init2 .color-26 {
+  animation: shine26 1s infinite 5.2s;
+}
+@keyframes shine26 {
+  50% {
+    background: #ffebb3;
+    box-shadow: 0 0 0px 2px #ffebb3;
+  }
+}
+.disco-init1 .color-27 {
+  background: #ff4d00;
+}
+
+.disco-init2 .color-27 {
+  animation: shine27 1s infinite 5.4s;
+}
+@keyframes shine27 {
+  50% {
+    background: #ffc9b3;
+    box-shadow: 0 0 0px 2px #ffc9b3;
+  }
+}
+.disco-init1 .color-28 {
+  background: #ff0022;
+}
+
+.disco-init2 .color-28 {
+  animation: shine28 1s infinite 5.6s;
+}
+@keyframes shine28 {
+  50% {
+    background: #ffb3bd;
+    box-shadow: 0 0 0px 2px #ffb3bd;
+  }
+}

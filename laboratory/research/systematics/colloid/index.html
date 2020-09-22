@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel="stylesheet" href="https://use.typekit.net/bgw2gie.css">
+<style>
+html, body {
+	margin: 0; padding: 0;
+	background-color: #000;
+	color: #fff;
+	font-family: 'industry', sans-serif;
+	font-size: 14px;
+}
+h2 {
+	font-size: 2rem;
+	color: #fff;
+}
+
+/*UI*/
+
+#container {
+	width: 720px;
+	margin: 4px auto;
+}
+#credits{
+	margin-top: 16px;
+	font-size: 12px;
+}
+
+/* WORLD*/
+
+#world {
+	background-color: #000;
+	border: 1px #fff none;/*dashed;*/
+	margin: 2rem auto;
+
+	position: relative;
+
+	width: 720px;
+	height: 720px;
+
+	overflow: hidden;
+}
+
+.particle {
+	position: absolute;
+	border-radius: 100%;
+}
+.p-magnetic {
+	background-color: #f66;
+}
+
+</style>
+<title>Colloidal Phase Transitions</title>
+</head>
+<body>
+
+<div id = "container">
+	<h2>COLLOIDAL PHASE TRANSITIONS</h2>
+
+	<div id = "world" width = "720" height = "720"></div>
+	<script src = "../shared/v4.js"></script>
+	<script src = "../shared/spash.js"></script>
+	<script src = "../shared/hsv2hex.js"></script>
+	<script src = "colloid.js"></script>	
+	<div>
+	<p>
+	A toy model of diamegnetic and paramagnetic colloidal particles suspended in fluid, subject to an imposed magnetic field. As the direction of the magnetic field and the temperature varies, transitions occur between a fluid and several solid phases. Particles are coloured by temperature and by modified order parameter.</p>
+
+	
+
+	<ul>
+		<li>&uarr;/&darr;: adjust temperature.</li>
+		<li>&larr;/&rarr;: adjust magnetic field direction.</li>
+	</ul></div>
+	<div id = "credits">
+	<p>Based on <i>Phase Transformations in Binary Colloidal Monolayers</i>, Ye Yang et al. 2015.</p>
+	</div>
+
+</div>
+
+</body>
+</html>

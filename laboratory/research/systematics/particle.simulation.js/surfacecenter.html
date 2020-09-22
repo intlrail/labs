@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>International Rail: Gate</title>
+  <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
+  <meta name="author" content="Vincent Garreau" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" media="screen" href="css/style.css">
+  <script>
+  (function(d) {
+    var config = {
+      kitId: 'qot1gxo',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
+  <style> body {
+    background-image: url('../assets/blueprints/surfacecenter.png');}
+
+    #particles-container {
+      text-align:center;
+    /*display:flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      flex-direction: row-reverse;
+      align-items: center;
+      align-content: center;*/
+
+}
+    #particles-js {
+      width: 840px;
+      height: 100px;
+      position: absolute;
+      transform:rotate(324deg);
+      left: 35%;
+      bottom: 49%;
+      overflow: hidden;
+      /*flex: 1 0 auto;
+      width:100px;
+      height:100px;*/
+}
+</style>
+</head>
+<body>
+  <header>
+        <img class="logo" src="../intlrail.png"><h1>International Rail</h1>
+      </header>
+<div id="particles-container">
+<!-- count particles -->
+<div class="count-particles">
+  <span class="js-count-particles"></span>
+</div>
+
+<!-- particles.js container -->
+<div id="particles-js"></div>
+
+<!-- scripts -->
+<script src="particles.js"></script>
+<script src="js/app.js"></script>
+
+<img class="scale-graph" src="../assets/blueprints/scale-1500.png">
+<!-- stats.js -->
+<!--<script src="js/lib/stats.js"></script>
+<script>
+  var count_particles, stats, update;
+  stats = new Stats;
+  stats.setMode(0);
+  stats.domElement.style.position = 'absolute';
+  stats.domElement.style.left = '0px';
+  stats.domElement.style.top = '0px';
+  document.body.appendChild(stats.domElement);
+  count_particles = document.querySelector('.js-count-particles');
+  update = function() {
+    stats.begin();
+    stats.end();
+    if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+      count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+    }
+    requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+</script>-->
+</div>
+</body>
+</html>

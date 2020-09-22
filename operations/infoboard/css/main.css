@@ -1,0 +1,270 @@
+/*Global*/
+@import url("https://use.typekit.net/bgw2gie.css");
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
+
+:lang(en) {
+    font-family: "industry", sans-serif;
+}
+
+:lang(ko) {
+	font-family: "Do Hyeon", sans-serif;
+}
+
+/*Elements*/
+
+.navbar-nav {flex-direction: row;}
+.navbar-nav .nav-link {padding: 1rem;}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background: #000;
+    font-size: 32px;
+    font-weight: 400;
+}
+
+header {padding: .5rem;}
+
+section {padding: 1rem;}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+ul {list-style-type: none;}
+
+
+a:link {color: #fff;}
+a:visited {color: #E5E5E5;}
+a:hover {color: #BFBFBF;}
+a:active {color: #E6E6E6;}
+
+b {font-weight: 500;}
+
+p {font-size: 1.25rem;}
+
+/*Classes*/
+
+.dropdown-menu {
+    background: #000;
+    color: #fff;
+}
+
+.navbar-dark {
+  background: rgba(0,0,0,.6);
+}
+
+.logo {
+    max-height: 2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  background-color: rgba(0, 0, 0, 0.6);
+  margin: 1rem;
+
+}
+
+.dark
+
+.credits {
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    color: #fff;
+    text-align: left
+}
+
+.directory {
+  margin: 0;
+}
+
+.row {
+  display:inline-flex;
+}
+
+.iso {
+    float:right;
+    padding: 1rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.icons {
+  height: 5rem;
+  display: inline-block;
+}
+
+.shortcuts {height: 3rem; -webkit-filter: invert(100%); 
+  filter: invert(100%); float: right;}
+
+
+.welcome {
+    padding-top:2rem;
+    color: #fff;
+    font-weight: 400;
+    text-align: center;
+}
+
+
+/*IDs*/
+
+#sitetitle {
+  font-size: 3rem;
+
+}
+
+/* Canvas CSS */
+
+#c {
+  display: block;
+
+}
+
+#info {
+	position: absolute;
+	top: 10px;
+	width: 100%;
+	display:block;
+}
+
+
+
+/* Footer */
+
+  #footer {
+    -moz-transition: bottom 0.2s ease;
+    -webkit-transition: bottom 0.2s ease;
+    -ms-transition: bottom 0.2s ease;
+    transition: bottom 0.2s ease;
+    position: fixed;
+    bottom: -20em;
+    color: #FFF;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 9999;
+  }
+
+    #footer.show {
+      bottom: 0;
+    }
+
+    #footer .info {
+      position: relative;
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 50% 50% 0 0;
+      background: #000;
+      width: 3em;
+      height: 3em;
+      margin-bottom: -1.75em;
+      color: #FFF;
+      font-size: 1.25em;
+      padding-top: .35em;
+    }
+
+      #footer .info span {
+        display: none;
+      }
+
+    #footer .inner {
+      display: -moz-flex;
+      display: -webkit-flex;
+      display: -ms-flex;
+      display: flex;
+      -moz-justify-content: center;
+      -webkit-justify-content: center;
+      -ms-justify-content: center;
+      justify-content: center;
+      -moz-align-items: stretch;
+      -webkit-align-items: stretch;
+      -ms-align-items: stretch;
+      align-items: stretch;
+      display: -ms-flexbox;
+      -ms-flex-align: center;
+      -ms-flex-pack: center;
+      position: relative;
+      z-index: 10003;
+      background: #000;
+      padding: 2em;
+      height: 20em;
+    }
+
+      #footer .inner .content,
+      #footer .inner .copyright {
+        width: 50%;
+        text-align: left;
+        color: rgba(255, 255, 255, 0.75);
+        padding: 2em;
+        display: inline-block;
+      }
+
+        #footer .inner .content h3,
+        #footer .inner .copyright h3 {
+          color: #FFF;
+          font-size: 1.75em;
+        }
+
+        #footer .inner .content a,
+        #footer .inner .copyright a {
+          color: #FFF;
+        }
+
+          #footer .inner .content a:hover,
+          #footer .inner .copyright a:hover {
+            color: rgba(255, 255, 255, 0.75);
+          }
+
+        #footer .inner .content p,
+        #footer .inner .copyright p {
+          margin: 0;
+        }
+
+      #footer .inner .copyright ul {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        padding-bottom: 1em;
+      }
+
+    @media screen and (max-width: 980px) {
+
+      #footer {
+        position: relative;
+        bottom: 0;
+      }
+
+        #footer .inner {
+          height: auto;
+          display: block;
+        }
+
+          #footer .inner .content,
+          #footer .inner .copyright {
+            display: block;
+            width: 100%;
+            text-align: center;
+          }
+
+        #footer .info {
+          display: none;
+        }
+
+    }
+
+    @media screen and (max-width: 480px) {
+
+      #footer .inner {
+        padding: 2em;
+      }
+
+        #footer .inner .content,
+        #footer .inner .copyright {
+          padding: 1em;
+        }
+
+    }

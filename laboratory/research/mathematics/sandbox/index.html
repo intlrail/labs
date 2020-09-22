@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Fractured Square</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.10/p5.js"></script>
+  <script src="sketch3.js"></script>
+  <style>
+  	#sketch1, #sketch2 {
+    /* move both sketchs to the middle of the page */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+#sketch1 {
+    /* make sketch1 a bit transparent */
+    opacity: 0.8;
+}
+#sketch2 {
+    /* offset sketch2 a little, and move it behind sketch1 */
+    z-index: -1;
+    margin-left: -100px;
+    margin-top: -100px;
+}</style>
+</head>
+
+<body style="text-align:center; background:#000;">
+<div class="container">
+	<div id="sketch1"></div>
+	<div id="sketch2"></div>
+</div>
+</body>
+
+</html>

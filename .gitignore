@@ -6,8 +6,12 @@ bin-release/
 
 # Other files and folders
 .settings/
+assets/
 
 # Executables
+workflow.yaml
+intlrail.png
+intlrail2.png
 *.swf
 *.air
 *.ipa
