@@ -1,0 +1,35 @@
+{
+  "name": "2d-space-colonization-experiments",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonwebb/2d-space-colonization-experiments.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jasonwebb/2d-space-colonization-experiments/issues"
+  },
+  "homepage": "https://github.com/jasonwebb/2d-space-colonization-experiments#readme",
+  "devDependencies": {
+    "file-saver": "^2.0.2",
+    "kdbush": "^3.0.0",
+    "path": "^0.12.7",
+    "point-in-polygon": "^1.0.1",
+    "simplex-noise": "^2.4.0",
+    "svg-inline-loader": "^0.8.2",
+    "svg-pathdata": "^5.0.4",
+    "svg-points": "^6.0.1",
+    "vec2": "^1.6.1",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}

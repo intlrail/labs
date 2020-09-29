@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Underground Tunnel Pattern</title>
+  <style>
+  	body, html {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: #000;
+}
+
+svg {
+	width: 95vw; 
+	height: 95vw;
+	max-height: 95vh;
+	max-width: 95vh;
+	margin: auto;
+	position: absolute;
+	top:0;
+	bottom:0; 
+	left:0;
+	right:0; 
+	cursor: pointer;
+}
+  </style>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.2"></svg>
+<!-- partial -->
+<script src='./script.js'></script>
+<script>
+"use strict";
+
+const svg = SVG({
+	name: "intersections",
+	size: 600, // millimeters
+	background: "#000",
+	stroke: "#fff",
+	strokeWidth: 0.00125,
+	centerOrigin: true,
+	cpuTime: 500 // milliseconds per frame
+});
+
+const points = [];
+
+function setup () {
+	points.length = 0;
+	let d = 1;
+	for (let j = 0; j < 128; j++) {
+			let x = (-100 + Math.random() * 5) * d;
+			let y = Math.random() * 50 - 25;
+			let a = 0;
+			for (let i = 0; i < 100; i++) {
+					x += d * Math.cos(a) * 2;
+					y += Math.sin(a) * 2;
+					a += (Math.random() - Math.random()) * 0.1;
+					points.push([x, y]);
+			}
+			d = -d;
+	}
+}
+
+function draw(i) {
+    const p0 = points[i];
+		svg.moveTo(p0[0], p0[1]);
+    for (let j = i + 1; j < points.length; j++) {
+        const p1 = points[j];
+        const dx = p1[0] - p0[0];
+        const dy = p1[1] - p0[1];
+        if (Math.sqrt(dx * dx + dy * dy) < 10 && Math.random() > 0.7) {
+            svg.line(p0, p1);
+        }
+    }
+    return i < points.length - 1;
+}
+</script>
+
+
+</body>
+</html>
