@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel="stylesheet" href="https://use.typekit.net/bgw2gie.css">
+<style>
+html, body {
+	margin: 0; padding: 0;
+	background-color: #000;
+	color: #fff;
+	filter: saturate(10%);
+	font-family: 'industry', sans-serif;
+	font-size: 14px;
+}
+h2 {
+	font-size: 18px;
+	color: #fff;
+}
+
+/*UI*/
+
+#container {
+	width: 720px;
+	margin: 4px auto;
+}
+#credits{
+	margin-top: 16px;
+	font-size: 12px;
+}
+
+/* WORLD*/
+
+#world {
+	border: 1px #ccc none;/*dashed;*/
+	filter:invert(100%)contrast(120%);
+	margin: 4px auto;
+	position: relative;
+	width: 720px;
+	height: 720px;
+	image-rendering: pixelated;
+	/*overflow: hidden;*/
+}
+
+</style>
+
+</head>
+<body>
+
+<div id = "container">
+	<h2>PARALELL LATTICE BOLTZMANN</h2>
+
+	<canvas id = "world" width = "512" height = "512"></canvas>
+
+	<script id = "vsh" type = "text/GLSL">#version 300 es
+	precision highp float;
+
+	in vec2 vert_x;
+
+	void main ()
+	{
+		gl_Position = vec4(vert_x, 0., 1.);
+	}
+	</script>
+
+	<script id = "fsh-sim" type = "text/GLSL">#version 300 es
+	precision highp float;
+
+	uniform sampler2D tex;
+
+	uniform vec2 cursor;
+	uniform float radius;
+
+	out vec4 frag_color;
+
+	/* lattice vectors & weights */
+	vec2 e[9];
+	float w[9] = float[](
+		4./9.,
+		1./9., 1./9., 1./9., 1./9.,
+		1./36.,	1./36., 1./36.,	1./36.);
+
+	/* flag */
+	float flag = 0.0; 
+
+	vec4 texel(sampler2D tx, ivec2 frag) {
+		return texture(tx, vec2(frag)/512.);
+	}
+
+	ivec2 frag_to_lab (ivec2 frag) {
+		return frag/2;
+	}
+	ivec2 lab_to_frag (ivec2 lab, int celltype) {
+		return lab*2+ivec2((celltype&2)/2, celltype&1);
+	}
+
+	float f_prev (int component, ivec2 lab) {
+		return texel(
+			tex,
+			lab_to_frag(
+				lab,
+				component%3
+			))[component/3];
+	}
+
+	float f_equi (int component, float rh, vec2 u) {
+		int i = component;
+		float eiu = dot(u, e[i]);
+		float feq =  w[i]*rh*(1.0 +
+			3.0*eiu + 4.5*eiu*eiu - 1.5*dot(u, u));
+		if (!(feq >= 0.0)) { flag = 1.0; }
+		return feq;
+	}
+
+	bool boundary (ivec2 lab) {
+		//return distance(vec2(lab), vec2(60, 128)) < 12.;
+		return abs(lab.x-50) < 6 && abs(lab.y - 128) < 18 ||
+		distance(vec2(lab), cursor) < radius;
+	}
+
+	void main ()
+	{
+
+		ivec2 frag = ivec2(gl_FragCoord.xy);
+		ivec2 lab = frag_to_lab(frag);
+
+		int celltype = 2*(frag.x&1) + (frag.y&1);
+
+		e[0] = vec2( 0,  0); e[1] = vec2( 1,  0); e[2] = vec2( 0,  1);
+		e[3] = vec2(-1,  0); e[4] = vec2( 0, -1); e[5] = vec2( 1,  1);
+		e[6] = vec2(-1,  1); e[7] = vec2(-1, -1); e[8] = vec2( 1, -1);
+
+		int inv[9] = int[](0, 3, 4, 1, 2, 7, 8, 5, 6);
+
+		/* streaming step */
+		float f[12]; /* 9, 10, and 11 are rho, u.x, and u.y */
+		for (int i = 0; i < 9; ++i) {
+			f[i] = mix(
+				f_prev(i, lab - ivec2(e[i])),
+				f_prev(inv[i], lab),
+				boundary(lab-ivec2(e[i])));
+
+			f[i] = mix(f[i], w[i], float(boundary(lab)));
+		}
+
+		/* equilibium */
+		float rho = 0.0;
+		vec2 u = vec2(0.0, 0);
+		for (int i = 0; i < 9; ++i) {
+			rho += f[i];
+			u += f[i]*e[i];
+		}
+		u = mix(u/rho, vec2(0., 0.), float(rho == 0.));
+
+		f[9] = rho; f[10] = u.x; f[11] = u.y;
+
+		/* relaxation */
+		float omega = 1.8;
+		for (int i = 0; i < 9; ++i) {
+			f[i] = f[i] * (1.0 - omega) + omega * f_equi(i, rho, u);
+
+			/* hide your instabilities */
+			f[i] = mix(f[i], w[i], float(f[i] < 0.));
+		}
+
+		/* sources and stuff */
+		if (lab.x == 0) {
+		for (int i = 0; i < 9; ++i) {
+			f[i] = f_equi(i, 1.0, vec2(0.1, 0.00001));
+		}}
+
+		/* write results; don't care about celltype 3 */
+		frag_color = vec4(
+			f[celltype%4],
+			f[celltype%4+3],
+			f[celltype%4+6],
+			f[celltype%4+9]);
+	}
+	</script>
+	<script id = "fsh-img", type = "text/GLSL">#version 300 es
+		precision highp float;
+
+		uniform sampler2D tex;
+
+		uniform vec2 cursor;
+		uniform float radius;
+
+		out vec4 frag_color;
+
+		vec4 texel(sampler2D tx, ivec2 frag) {
+			return texture(tx, vec2(frag)/512.);
+		}
+
+		ivec2 frag_to_lab (ivec2 frag) {
+			return frag/2;
+		}
+		ivec2 lab_to_frag (ivec2 lab, int celltype) {
+			return lab*2+ivec2((celltype&2)/2, celltype&1);
+		}
+
+		float f (int component, ivec2 lab) {
+			return texel(
+				tex,
+				lab_to_frag(
+					lab,
+					component%3
+				))[component/3];
+		}
+
+		float vort (ivec2 lab) {
+			/* vorticity by central difference */
+			return (0.5*(f(11, lab+ivec2(1, 0))-f(11, lab-ivec2(1, 0))) -
+			0.5*(f(10, lab+ivec2(0, 1))-f(10, lab-ivec2(0, 1))));
+		}
+
+		vec4 scale (float s) {
+			/* NaN - respecting clamp */
+			float c = 1.0 * float(s > 1.) +
+			(-1.0) * float(s < -1.) +
+			s*float((s < 1.) && (s > -1.));
+
+			float k = -0.2*max(abs(s)-1., 0.);
+
+			return vec4(1.-c+k, 1.-0.2*abs(c)+k, 1.+c+k, 1.);
+		}
+
+		bool boundary (ivec2 lab) {
+			return abs(lab.x-50) < 4 && abs(lab.y - 128) < 16 ||
+			distance(vec2(lab), cursor) < radius-2.;
+		}
+
+		void main()
+		{
+			ivec2 lab = frag_to_lab(ivec2(gl_FragCoord.xy));
+
+			float rho = 3.*(f(9, lab)-1.);
+			float v = vort(lab)*30.;
+
+			/* grey if part of obstable, white if border (vorticity
+			 * data doesn't make sense there), colour by vorticity
+			 * otherwise. */
+			bool b = boundary(lab);
+			frag_color = mix(
+				scale(v),
+				vec4(1., 1., 1., 1.) - float(b)*vec4(0.1, 0.1, 0.1, 0.0),
+				float((lab.x == 0) || (lab.x == 255) || b));
+		}
+	</script>
+
+	<script src = "../shared/gl.js"></script>
+	<script src = "lbm.js"></script>
+	
+	<div><p>D2Q9 Lattice Gas Boltzmann simulation exhibiting vortex shedding. Timestepping is done in a GLSL fragment shader, in which all cells are updated in parallel. The flow field, 256 by 256 grid cells in dimension, is coloured by vorticity.</p>
+
+	<p>Interact with the simulation by holding down a mouse button, moving the cursor, and scrolling.</p>
+	</div>
+
+	<div id = "credits">
+	J. Lo, May 2018.
+	</div>
+
+</div>
+
+</body>
+</html>
