@@ -1,0 +1,120 @@
+/*/ main colors/*/
+
+:root {
+
+/*/color group 0: monos/*/
+
+--white: rgba(255,255,255,1);
+--black: rgba(0,0,0,1);
+
+/*/
+
+--white: #ffffff
+--black: #000000
+
+/*/
+
+/*/color group 1: reds/*/
+
+--red: rgba(255,66,62,1);
+--orange: rgba(255,116,66,1);
+--tangerine: rgba(255,152,36,1);
+--yellow: rgba(255, 221, 26, 1);
+
+/*/
+--red: #ff423e
+--orange: #ff7442
+--tangerine: #fc9824
+--yellow: #ffdd1a
+/*/
+
+/*/color group 2: greens/*/
+
+--lemon: rgba(255,255,25,1);
+--lime: rgba(163,255,24,1);
+--green: rgba(83,255,83,1);
+--mint: rgba(25,234,164,1);
+
+/*/
+--lemon: #ffff19
+--lime: #a3ff18
+--green: #53ff53
+--mint: #19eaa3
+/*/
+
+
+/*/color group 3: blues/*/
+
+--turquoise: rgba(25,234,235,1);
+--cyan: rgba(24,206,255,1);
+--blue: rgba(77,148,255,1);
+--plum: rgba(132,114,255,1);
+
+/*/
+--turquoise: #19eaeb
+--cyan: #18ceff
+--blue: #4d94ff
+--plum: #8472ff
+/*/
+
+/*/color group 4: purples/*/
+
+--violet: rgba(182,110,255,1);
+--purple: rgba(223,95,255,1);
+--magenta: rgba(255,83,240,1);
+--fuchsia: rgba(255,72,128,1);
+
+
+/*/
+--violet: #b66eff
+--purple: #df5fff
+--magenta: #ff53f0
+--fuchsia: #ff4880
+/*/
+
+background: var(--black)
+
+}
+
+
+:lang(en) {font-family: industry, sans-serif;}
+
+:lang(ko) 	{font-family: source-han-sans-korean;}
+
+body {
+	font-size: 1rem;
+	color: var(--white);
+	background: var(--black);
+}
+
+a {
+	color: var(--white);
+}
+
+.one {
+
+	color: var(--white);
+	&:hover, &:focus { 
+    border-color: var(--hover);
+    color: #fff;
+  			}
+
+
+  color: var(--red);
+  display: inline-block;
+}
+
+.two {
+  color: var(--green);
+  display: inline-block;
+}
+
+.three {
+	color: var(--blue);
+  display: inline-block;
+}
+
+.four {
+	color: var(--purple);
+  display: inline-block;
+}

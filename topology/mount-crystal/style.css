@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  overflow: hidden;
+  height: 100%;
+  font-family: Arial;
+  background: #000;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.download,
+.instruction {
+  position: absolute;
+  top: 0;
+  background: #222;
+  padding: 1vw;
+  border-radius: 3px;
+  margin: 1vw;
+  cursor: pointer;
+  opacity: 0.5;
+  color: #fff;
+  font-size: 1vw;
+  text-decoration: none;
+}
+.download:hover,
+.instruction:hover {
+  opacity: 1;
+}
+.instruction {
+  left: 0;
+}
+.instruction.generating {
+  background: #fff;
+  color: #000;
+  pointer-events: none;
+}
+.download {
+  right: 0;
+}

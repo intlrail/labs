@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="author" content="International Rail">
+		<meta name="keywords" content="science, science fiction">
+		<meta name="description" content="A supersonic vacuum transit network connecting 52 hubs across the seven continents and 12 colonial posts around the inner planets.">
+		<!-- Icons -->
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+		<title>International Rail: Home</title>
+        <!-- JQUERY -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <!-- BOOTSTRAP -->
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<!-- FULLPAGE.JS -->
+		<script type="text/javascript" src="assets/js/fullpage.js"></script>
+		<!-- TYPEIT.JS -->
+		<script src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script>
+		<!-- TEXTILLIATE.JS -->
+		<script type="text/javascript" src="assets/js/jquery.lettering.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.fittext.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.textillate.js"></script>
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+  		<link rel="stylesheet" type="text/css" href="assets/css/animate.css" />
+	</head>
+    <body>
+<div class="wrap" id="fullpage">
+	<div class="section" id="section0">
+		<img class="d-inline-flex logo" src="assets/logos/whitelogo.png">
+
+		<h2 class="py-5 tlt">Welcome to International Rail Industries.</h2>
+
+	</div>
+
+	<div class="section" id="section1">
+		    <p class="typed">In the summer of 1951, the United States War Department commissioned a research and development project to study the effects of extremely low frequency soundwaves on its personnel.</p>
+	</div>
+	
+</div>
+
+<!--TYPEIT.js-->
+<script>
+  new TypeIt('.typed', {
+  speed: 70,
+  startDelay: 10,
+  waitUntilVisible: true
+}).go();
+
+  new TypeIt('.revealed', {
+  speed: 1,
+  startDelay: 0,
+  waitUntilVisible: true
+}).go();
+
+</script>
+
+<!--Textillate.js-->
+
+<script type="text/javascript">
+	$(function () {
+    $('.tlt').textillate({ 
+    	in: { 
+    		effect: 'fadeIn',
+    		delay: 1500,
+    		sync: true,
+		    callback: function () {}
+    	} 
+    });
+})
+</script>
+
+<!--Fullpage.js-->
+<script type="text/javascript">
+	var myFullpage = new fullpage('#fullpage', {
+		sectionsColor: ['#000'],
+		navigation: true,
+        navigationPosition: 'right',
+        navigationTooltips: ['Welcome', 'Research', 'Development', 'Administration', 'Operations'],
+        anchors: [],
+        menu: '#menu',
+        lazyLoad: true
+	});
+</script>
+    </body>
+</html>

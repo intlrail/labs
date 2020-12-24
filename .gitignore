@@ -10,7 +10,6 @@ bin-release/
 .gitignore
 .github/
 .settings/
-assets/
 
 # Executables
 *.ico

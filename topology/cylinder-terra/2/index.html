@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Terrains II</title>
+  <script>
+// Restore original RAF
+if (window.location.href.indexOf("fullcpgrid") > -1) {
+	document.addEventListener('DOMContentLoaded', function() {
+		const original = document.createElement('iframe');
+		original.style.display = 'none';
+		document.body.appendChild(original);
+		window.requestAnimationFrame = original.contentWindow.requestAnimationFrame;
+	}, false);
+}
+</script>
+<style>
+body, html {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	overflow: hidden;
+}
+
+canvas {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+
+}
+</style>
+
+</head>
+<body>
+<script  src="./script.js"></script>
+
+</body>
+</html>

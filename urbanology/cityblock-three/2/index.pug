@@ -1,0 +1,62 @@
+ul.controls
+	li: button#info Info
+	li: button#reset Generate
+	li: button#options Options
+
+.info.module.hidden
+	p A procedurally generated city using threejs. Change some options and regenerate the city!
+	
+.options.module.hidden
+	section
+		h3 Map
+		.row
+			.col.col-label: label(for="block_count") Grid Count
+			.col.col-input: input(type="number", name="block_count", id="block_count", min="1", max="50", value="10")
+		.row
+			.col.col-label: label(for="block_size") Grid Size
+			.col.col-input: input(type="number", name="block_size", id="block_size", min="10", max="300", value="100", step="10")
+		.row
+			.col.col-label: label(for="water_threshold") Water Threshold
+			.col.col-input: input(type="number", name="water_threshold", id="water_threshold", min="0.0", max="1.0", value="0.1", step="0.1")
+		.row
+			.col.col-label: label(for="tree_threshold") Park Threshold
+			.col.col-input: input(type="number", name="tree_threshold", id="tree_threshold", min="0.0", max="1.0", value="0.1", step="0.1")
+		.row
+			.col.col-label: label(for="noise_frequency") Noise Frequency
+			.col.col-input: input(type="number", name="noise_frequency", id="noise_frequency", min="0", max="50", value="8")
+	section
+		h3 Buildings
+		.row
+			.col.col-label: label(for="build_min_h") Min Height
+			.col.col-input: input(type="number", name="build_min_h", id="build_min_h", min="5", max="1000", value="20")
+		.row
+			.col.col-label: label(for="build_max_h") Max Height
+			.col.col-input: input(type="number", name="build_max_h", id="build_max_h", min="5", max="1000", value="300")
+		.row
+			.col.col-label: label(for="subdiv") Subdivisions
+			.col.col-input: input(type="number", name="subdiv", id="subdiv", min="0", max="4", value="2")
+		.row
+			.col.col-label: label(for="build_exp") Height Exponent
+			.col.col-input: input(type="number", name="build_exp", id="build_exp", min="1", max="10", value="6")
+	section
+		h3 Other
+		.row
+			.col.col-label: label(for="max_cars") Max Cars
+			.col.col-input: input(type="number", name="max_cars", id="max_cars", min="1", max="100", value="50")
+		.row
+			.col.col-label: label(for="preserve_seed") Preserve Seed
+			.col.col-input: input(type="checkbox", name="preserve_seed", id="preserve_seed")
+		.row
+			.col.col-label: label(for="debug") Debug
+			.col.col-input: input(type="checkbox", name="debug", id="debug")
+	//section
+		h3 Direct Url
+		input#url(type="text", readonly) 
+
+	.row.buttons
+		button#default Defaults
+		a.button#url(target="_blank") City Permalink
+		
+		
+		
+		
