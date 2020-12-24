@@ -1,8 +1,6 @@
 # International Rail Laboratory
 
-Welcome to the International Rail Laboratory (IRL), the principal research and development agency within the Engineering Division at International Rail.
-
-The laboratory consists of three departments that are publicly accessible: 
+This laboratory consists of three departments that are publicly accessible: 
 
 /research department is responsible for exploring and investigating all unknown systems and unidentified elements in various fields of science.
 
