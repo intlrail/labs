@@ -2501,12 +2501,14 @@
   var misc = [
 
     {
-      name: 'international-rail',
+      name: 'intlrail',
       colors: ['#1c1c1e', '#242426', '#2c2c2e', '#363638', 
-      '#3a3a3c', '#444446', '#48484a', '#545456', '#636366', 
-      '#6c6c70', '#7c7c80'],
-      //stroke: '#ffffff',
-      //background: '#000000',
+      '#3a3a3c', '#444446', '#48484a', '#545456',
+      '#636366', '#6c6c70', '#7c7c80', '#8e8e8e;', 
+      '#aeaeb2' , '#bcbcc0' , '#c7c7cc' , '#d1d1d6', 
+      '#d8d8dc' , '#e5e5ea' , '#ebebf0' , '#f2f2f7'],
+      stroke: '#ffffff',
+      background: '#000000',
     },
     {
       name: 'frozen-rose',
@@ -3126,10 +3128,10 @@
 
       gui_opts = {
         noise_scale: 400,
-        noise_persistence: 0.3,
-        apply_sigmoid: 0,
-        palette: 'international-rail',
-        line_density: 80,
+        noise_persistence: 0.35,
+        apply_sigmoid: 5,
+        palette: 'intlrail',
+        line_density: 90,
         full_reset: () => reset(true),
         partial_reset: () => reset(false)
       };

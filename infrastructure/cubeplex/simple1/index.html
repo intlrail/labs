@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Cubeplex: Simple1</title>
+  <style>
+  	html, body {
+	overflow: hidden;
+	touch-action: none;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	background: #000;
+}
+canvas {
+	position: absolute;
+	width: 100%; 
+	height: 100%;
+	user-select: none;
+	cursor: pointer;
+}
+  </style>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<canvas></canvas>
+<!-- Click to generate a new image -->
+<!-- partial -->
+<script  src="./simple1/script.js"></script>
+  <script>
+  	"use strict";
+//////////////////////////////////////////////////////////////////
+// Adapted from a CFDG program
+// https://www.contextfreeart.org/gallery2/index.html#design/713
+// Cubic Complex by XpoPen, May 16th, 2007
+//////////////////////////////////////////////////////////////////
+{
+	const code = {
+		setup() {
+			this.render({
+				startShape: 'CUBICCOMPLEX',
+				background: '#000',
+				transform: {sat: 1, hue: this.randint(360)},
+				zoom: 0.5
+			});
+		},
+		rules() {
+			return {
+				CUBICCOMPLEX: [
+					1, s => {
+						this.CUBEARRAYS(s);
+						this.CUBICCOMPLEX(s, {x: -1, y: .58, z: -1});
+					},
+					0.1, s => {
+						this.CUBEARRAYS(s);
+					}
+				],
+				CUBEARRAYS: [
+					1, s => {
+						this.CUBE5NEXT(s);
+					},
+					1, s => {
+						this.CUBE4NEXT(s);
+					},
+					1, s => {
+						this.CUBE3NEXT(s);
+					},
+					1, s => {
+						this.CUBE5UP(s);
+					},
+					1, s => {
+						this.CUBE4UP(s);
+					},
+					1, s => {
+						this.CUBE3UP(s);
+					},
+					1, s => {
+						this.CUBEZ(s);
+					}
+				],
+				CUBEZ: [
+					1, s => {
+						this.CUBEZ3(s);
+					},
+					1, s => {
+						this.CUBEZ4(s);
+					},
+					1, s => {
+						this.CUBEZ5(s);
+					}
+				],
+				CUBE5UP: [
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBE5UP(s, {y: 5, z: 5, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBE4UP(s, {y: 5, z: 5, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBE4UP(s, {y: 5.58, x: 1, z: 4, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBE4UP(s, {y: 5.58, x: -1, z: 4, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBE4UP(s, {y: 6.16, z: 3, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBE3UP(s, {y: 5, z: 5, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBE3UP(s, {y: 5.58, x: 1, z: 4, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBE3UP(s, {y: 5.58, x: -1, z: 4, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBE3UP(s, {y: 6.16, x: 2, z: 3, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBE3UP(s, {y: 6.16, x: -2, z: 3, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBE3UP(s, {y: 6.16, z: 3, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBE3UP(s, {y: 6.74, x: 1, z: 2, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBE3UP(s, {y: 6.74, x: -1, z: 2, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBE3UP(s, {y: 7.32, z: 1, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+					}
+				],
+				CUBE4UP: [
+					1, s => {
+						this.CUBEZ4(s);
+						this.CUBE4UP(s, {y: 4, z: 4, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ4(s);
+						this.CUBE3UP(s, {y: 4, z: 4, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ4(s);
+						this.CUBE3UP(s, {y: 4.58, x: 1, z: 3, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ4(s);
+						this.CUBE3UP(s, {y: 4.58, x: -1, z: 3, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ4(s);
+						this.CUBE3UP(s, {y: 5.16, z: 2, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ4(s);
+					}
+				],
+				CUBE3UP: [
+					1, s => {
+						this.CUBEZ3(s);
+						this.CUBE3UP(s, {y: 3, z: 3, hue: 10, sat: -0.2});
+					},
+					1, s => {
+						this.CUBEZ3(s);
+					}
+				],
+				CUBE5NEXT: [
+					1.2, s => {
+						this.CUBEZ5(s);
+						this.CUBEARRAYS(s, {x: 5, y: 2.9, z: -5});
+					},
+					1, s => {
+						this.CUBEZ5(s);
+						this.CUBEARRAYS(s, {x: -5, y: 2.9, z: -5});
+					}
+				],
+				CUBE4NEXT: [
+					1.2, s => {
+						this.CUBEZ4(s);
+						this.CUBEARRAYS(s, {x: 4, y: 2.32, z: -4});
+					},
+					1, s => {
+						this.CUBEZ4(s);
+						this.CUBEARRAYS(s, {x: -4, y: 2.32, z: -4});
+					}
+				],
+				CUBE3NEXT: [
+					1.2, s => {
+						this.CUBEZ3(s);
+						this.CUBEARRAYS(s, {x: 3, y: 1.74, z: -3});
+					},
+					1, s => {
+						this.CUBEZ3(s);
+						this.CUBEARRAYS(s, {x: -3, y: 1.74, z: -3});
+					}
+				],
+				CUBEZ3: s => {
+					this.loop(3, s, {x: 1, y: .58, z: -1}, s => {
+						this.CUBEX3(s);
+					});
+				},
+				CUBEX3: s => {
+					this.loop(3, s, {x: -1, y: .58, z: -1}, s => {
+						this.CUBEY3(s);
+					});
+				},
+				CUBEY3: s => {
+					this.loop(3, s, {y: 1, z: 1}, s => {
+						this.CUBECCSA(s);
+					});
+				},
+				CUBEZ4: s => {
+					this.loop(4, s, {x: 1, y: .58, z: -1}, s => {
+						this.CUBEX4(s);
+					});
+				},
+				CUBEX4: s => {
+					this.loop(4, s, {x: -1, y: .58, z: -1}, s => {
+						this.CUBEY4(s);
+					});
+				},
+				CUBEY4: s => {
+					this.loop(4, s, {y: 1, z: 1}, s => {
+						this.CUBECCSA(s);
+					});
+				},
+				CUBEZ5: s => {
+					this.loop(5, s, {x: 1, y: .58, z: -1}, s => {
+						this.CUBEX5(s);
+					});
+				},
+				CUBEX5: s => {
+					this.loop(5, s, {x: -1, y: .58, z: -1}, s => {
+						this.CUBEY5(s);
+					});
+				},
+				CUBEY5: s => {
+					this.loop(5, s, {y: 1, z: 1}, s => {
+						this.CUBECCSA(s);
+					});
+				},
+				CUBECCSA: [
+					1, s => {
+						this.CUBE(s);
+					},
+					0.5, s => {}
+				],
+				CUBE: s => {
+					this.SIDE(s, {s:[-1, 1], b: .19});
+					this.SIDE(s, {b: .39});
+					this.TOP(s, {b: .64});
+				},
+				SIDE: s => {
+					this.FACE(s, {skew:[0, 30]});
+				},
+				TOP: s => {
+					this.FACE(s, {s:[1.413, .816], r: 135});
+				},
+				FACE: s => {
+					this.SQUARE(s, {x: 0.5, y: -0.5, b: -1});
+					this.SQUARE(s, {x: 0.5, y: -0.5, s: .99});
+					this.SQU(s, {y: -.5, b: -0.5, z: -0.5});
+					this.SQU(s, {x: 1, y: -.5, b: -0.5, z: -0.5});
+					this.SQU(s, {x: .5, r: 90, b: -0.5, z: -0.5});
+					this.SQU(s, {x: .5, r: 90, y: -1, b: -0.5, z: -0.5});
+				},
+				SQU: [
+					1, s => {
+						this.SQUARE(s, {s: [0, 0], sat: -1});
+					},
+					0.3, s => {
+						this.SQU(s, {s: [10, 20]});
+					}
+				]
+			};
+		}
+	};
+	
+	// import cfdg library
+	cfdg.apply(code);
+	// run code
+	code.setup();
+	// Click canvas to generate a new image
+	["click", "touchdown"].forEach(event => {
+		document.saveCanvas('sketch_' + THE_SEED, 'png');//document.addEventListener(event, e => code.setup(), false);
+	});
+}
+  </script>
+</body>
+</html>

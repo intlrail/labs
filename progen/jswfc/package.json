@@ -1,0 +1,38 @@
+{
+  "name": "wavefunctioncollapse",
+  "version": "2.0.0",
+  "description": "Javascript port of https://github.com/mxgmn/WaveFunctionCollapse",
+  "main": "index.js",
+  "dependencies": {
+    "wavefunctioncollapse": "^2.0.0"
+  },
+  "devDependencies": {
+    "jimp": "0.6.4"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kchapelier/wavefunctioncollapse.git"
+  },
+  "keywords": [
+    "pattern",
+    "bitmap",
+    "tilemap",
+    "generation"
+  ],
+  "files": [
+    "index.js",
+    "LICENSE",
+    "model.js",
+    "overlapping-model.js",
+    "simple-tiled-model.js",
+    "random-indice.js",
+    "README.md"
+  ],
+  "author": "Kevin Chapelier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kchapelier/wavefunctioncollapse/issues"
+  },
+  "homepage": "https://github.com/kchapelier/wavefunctioncollapse#readme"
+}

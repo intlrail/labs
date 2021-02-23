@@ -1,0 +1,185 @@
+@import url('https://use.typekit.net/bgw2gie.css');
+
+body {
+	background-color: #000;
+	color: #fff;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	font-family: 'industry', sans-serif;
+}
+
+canvas {
+	position: absolute;
+
+}
+
+.mountains {
+    position: relative;
+    width: 100%
+    height: 100%
+}
+
+.panel {
+	background: #111;
+	opacity: 50%;
+	color: #eee;
+	z-index: -1000;
+}
+
+#skrollr-body {
+	height: 100%;
+	max-height: 100%;
+	margin: 0;
+	padding: 0;
+}
+#progressBar {
+	position: fixed;
+	background-color: red;
+	top: 0px;
+	margin: 0;
+	padding: 0;
+	z-index: 9999;
+	height: 5px;
+}
+.section {
+	position: fixed;
+	width: 100vw;
+	height: 15000%; /* the actual size of each section */
+	max-height: 15000vh; /* the actual size of each section */
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	background-color: black;
+}
+.text {
+	position: fixed;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+	z-index: 50;
+	width: 100vw;
+	color: white;
+	opacity: 0;
+	z-index: 10;
+}
+h1 {
+	font-weight: 400;
+	font-size: 6rem;
+	margin: 0;
+}
+#description {
+	opacity: 1;
+	padding-top: 10rem;
+}
+#back {
+	background-image: url("../assets/images/back.png");
+	background-size: cover;
+	position: fixed;
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 15000%;
+	z-index: 2;
+}
+#fr1 {
+	background-image: url("../assets/images/fr3.png");
+	position: fixed;
+	top: 95vh;
+	left: 25vw;
+	width: 50vw;
+	height: 20000%;
+	z-index: 4;
+}
+#fr2 {
+	background-image: url("../assets/images/fr2.png");
+	position: fixed;
+	top: 90vh;
+	width: 50vw;
+	left: 25vw;
+	height: 20000%;
+	z-index: 8;
+}
+#fr1red {
+	background-image: url("../assets/images/fr3red.png");
+	position: fixed;
+	top: 95vh;
+	left: 25vw;
+	width: 50vw;
+	height: 20000%;
+	z-index: 4;
+}
+#fr2red {
+	background-image: url("../assets/images/fr2red.png");
+	position: fixed;
+	top: 90vh;
+	width: 50vw;
+	left: 25vw;
+	height: 20000%;
+	z-index: 8;
+}
+#seco {
+	display: block;
+	position: fixed;
+	z-index: 100;
+	margin-left: auto;
+	left: 50vw;
+	top: 100vh;
+	margin-left: -139px;
+	z-index: 5;
+}
+#seco2 {
+	display: block;
+	position: fixed;
+	z-index: 100;
+	margin-left: auto;
+	left: 20vw;
+	top: 100vh;
+	margin-left: -139px;
+	z-index: 5;
+}
+#seco3 {
+	display: block;
+	position: fixed;
+	z-index: 100;
+	margin-left: auto;
+	left: 60vw;
+	top: 100vh;
+	margin-left: -139px;
+	z-index: 5;
+}
+#hexagons {
+	position: fixed;
+	z-index: 10;
+	top: 58vh;
+	width: 100vw;
+	text-align: center;
+}
+.hexa {
+	fill: white;
+	opacity: 0;
+}
+.hexa:hover {
+	cursor: pointer;
+}
+#hexas {
+	width: 15vh;
+	opacity: 1;
+}
+#loading{
+	opacity:1;
+	top: 90vh;
+}
+#scrollIcon{
+	position: fixed;
+	z-index: 50;
+	top:89vh;
+	height: 3vh;
+	fill: white;
+	stroke: white;
+	opacity: 0;
+	width: 100vw;
+}

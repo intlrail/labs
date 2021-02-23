@@ -1,0 +1,244 @@
+<!doctype html>
+<!--
+    Build information
+    Version: 6.21.0-BETA
+    Build Date: Thu, 15 Oct 2020 11:20:10 GMT
+-->
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta property="Description" content="Free and open source air traffic control simulator"/>
+        <meta property="og:title" content="openScope Air Traffic Control Simulator"/>
+        <meta property="og:description" content="Free and open source air traffic control simulator"/>
+        <meta property="og:url" content="http://openscope.io" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:image" content="assets/images/thumb.png"/>
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="openScope" />
+
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/assets/images/favicon/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="apple-touch-icon" sizes="57x57" href="/assets/images/favicon/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/assets/images/favicon/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/assets/images/favicon/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/assets/images/favicon/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/assets/images/favicon/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/assets/images/favicon/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/assets/images/favicon/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/assets/images/favicon/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+
+        <title>openScope Air Traffic Control Simulator</title>
+
+        <link rel="stylesheet" href="assets/style/main.min.css?=6.21.0-BETA" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91575400-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-91575400-1');
+        </script>
+    </head>
+    <body>
+        <div id="canvases"></div>
+        <div id="log"></div>
+
+        <div id="sidebar" class="stripView js-stripView mix-stripView_isHidden">
+            <div class="stripView-trigger js-stripView-trigger"></div>
+            <div class="stripTitle">Arrivals / Overflights</div>
+            <ul class='stripView-list nice-scrollbar js-stripViewArrivals-list'></ul>
+            <div class="stripTitle">Departures</div>
+            <ul class='stripView-list nice-scrollbar js-stripViewDepartures-list'></ul>
+        </div>
+
+        <div class="footer">
+            <input id="command"
+                   placeholder="enter aircraft command"
+                   autocapitalize="off"
+                   autocorrect="off"
+                   autocomplete="off"
+                   spellcheck="false"
+                   autofocus />
+        
+            <ul class="controls-menu">
+                <li class="control-item">
+                    <a class="control-icon fast-forwards">
+                        <img src="assets/images/icons/fast-forwards.png" />
+                    </a>
+                </li>
+                <li class="control-item">
+                    <a class="control-icon toggle-pause" title="Pause simulation">
+                        <img src="assets/images/icons/pause.png" />
+                    </a>
+                </li>
+                <li class="control-item">
+                    <a class="control-icon switch-airport" title="Switch airport">
+                        <img src="assets/images/icons/airport.png" />
+                    </a>
+                </li>
+                <li class="control-item">
+                    <a class="control-icon">
+                        <img src="assets/images/icons/scope.png" />
+                    </a>
+                    <div class="control-item-content">
+                        <a class="control toggle-labels">
+                            <img src="assets/images/icons/labels.png" />
+                            <span>Fixes & Runways</span>
+                        </a>
+                        <a class="control toggle-sids">
+                            <img src="assets/images/icons/sids.png" />
+                            <span>SID display</span>
+                        </a>
+                        <a class="control toggle-stars">
+                            <img src="assets/images/icons/stars.png" />
+                            <span>STAR display</span>
+                        </a>
+                        <a class="control toggle-airspace">
+                            <img src="assets/images/icons/airspace.png" />
+                            <span>Airspace Depiction</span>
+                        </a>
+                        <a class="control toggle-restricted-areas">
+                            <img src="assets/images/icons/restricted.png" />
+                            <span>Restricted Areas</span>
+                        </a>
+                        <a class="control toggle-terrain active">
+                            <img src="assets/images/icons/terrain.png" />
+                            <span>Terrain</span>
+                        </a>
+                        <a class="control toggle-video-map active">
+                            <img src="assets/images/icons/map.png" />
+                            <span>Video Map</span>
+                        </a>
+                        </a>
+                    </div>
+                </li>
+                <li class="control-item">
+                    <a class="control-icon">
+                        <img src="assets/images/icons/cog.png" />
+                    </a>
+                    <div class="control-item-content">
+                        <a class="control" id="toggle-options">
+                            <img src="assets/images/icons/cog.png" />
+                            <span>Settings</span>
+                        </a>
+                        <a class="control toggle-speech">
+                            <img src="assets/images/icons/speech.png" />
+                            <span>Speech</span>
+                        </a>
+                        <a class="control toggle-traffic">
+                            <img src="assets/images/icons/traffic.png" />
+                            <span>Traffic</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="control-item">
+                    <a class="control-icon">
+                        <img src="assets/images/icons/questionmark.png" />
+                    </a>
+                    <div class="control-item-content">
+                        <a class="control toggle-airport-guide">
+                            <img src="assets/images/icons/airport-guide.png" />
+                            <span>Airport Guide</span>
+                        </a>
+                        <a class="control" href="https://github.com/openscope/openscope/blob/develop/documentation/commands.md" target="_blank">
+                        	<img src="assets/images/icons/command-reference.png"/>
+                        	<span>Commands</span>
+                        </a>
+                        <a class="control toggle-tutorial">
+                            <img src="assets/images/icons/tutorial.png" />
+                            <span>Tutorial</span>
+                        </a>
+                        <a class="control js-changelogToggle">
+                            <img src="assets/images/icons/changelog.png" />
+                            <span>Changelog</span>
+                        </a>
+                        <a class="control" href="http://slack.openscope.io/" target="_blank">
+                        	<img src="assets/images/Slack_Mark_Monochrome_White_36px.png"/>
+                        	<span>Chat With Us</span>
+                        </a>
+                        <a class="control" href="https://github.com/openscope/openscope" id="js-github-external-link" target="_blank">
+                            <img src="assets/images/GitHub-Mark-Light-32px.png" class="github-logo" />
+                            <span>GitHub</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <div id="score" title="Score">-</div>
+        </div>
+
+        <div id="airport-switch" class="dialog">
+            <p class="dialog-title">Select Airport</p>
+            <div class="dialog-body nice-scrollbar"></div>
+        </div>
+
+        <div id="airportGuide-container" class="nice-scrollbar">
+            <div id="airportGuide-bd" class="js-airportGuide-view"></div>
+        </div>
+
+        <div class="changelog-container js-changelogContainer nice-scrollbar">
+            <h1 class="changelog-hd">Changelog</h1>
+            <h2 class="changelog-version">v6.21.0-BETA</h2>
+            <p class="js-changelog blackBox"></p>
+            <div class="changelog-view-full">
+                <a href="https://github.com/openscope/openscope/releases" target="_blank">View all changelogs</a>
+            </div>
+        </div>
+
+        <div id="paused">
+          <img src="assets/images/paused-overlay.png" title="Resume simulation" />
+        </div>
+
+        <div class="loadingView js-loadingView">
+            <div class="loadingViewMedia u-center-middle">
+                <div class="loadingViewMedia-figure">
+                    <img src="assets/images/openscope-radar-sweep.gif" height="150" width="150" />
+                </div>
+                <div class="loadingViewMedia-content">
+                    <div class="loadingViewMedia-hd">
+                        <h1 class="hdg hdg_1">openScope</h1>
+                    </div>
+                    <div class="loadingViewMedia-bd">
+                        Air Traffic Control Simulator
+                    </div>
+                    <div class="loadingViewMedia-bd">
+                        v6.21.0-BETA
+                    </div>
+                    <div class="loadingViewMedia-ft">
+                        Loading
+                        <span class="loadingView-dot loadingView-dot_one">.</span>
+                        <span class="loadingView-dot loadingView-dot_two">.</span>
+                        <span class="loadingView-dot loadingView-dot_three">.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-57858722-1', 'auto');
+            ga('create', 'UA-91575400-1', { 'name': 'openscope' });
+
+            ga('send', 'pageview');
+            ga('openscope.send', 'pageview', location.host);
+        </script>
+        <script>
+            window.GLOBAL = {
+                VERSION: '6.21.0-BETA'
+            };
+        </script>
+
+        <script src="assets/airports/airportLoadList.js"></script>
+        <script src="assets/scripts/client/bundle.min.js?v=6.21.0-BETA"></script>
+  </body>
+</html>

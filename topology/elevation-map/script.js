@@ -1,7 +1,19 @@
 (function (factory) {
   typeof define === 'function' && define.amd ? define(factory) :
   factory();
-}(function () { 'use strict';
+}
+
+(function () { 'use strict';
+
+
+  var intlrail = [{
+    name: 'intlrail',
+    colors: ['#1c1c1e', '#242426', '#2c2c2e', '#363638',
+        '#3a3a3c', '#444446', '#48484a', '#545456'
+    ],
+    stroke: '#636366',
+    background: '#000000',
+}];
 
   var misc = [
     {
@@ -885,6 +897,7 @@
   ];
 
   const pals = misc.concat(
+    intlrail,
     ranganath,
     roygbivs,
     tundra,
@@ -1519,7 +1532,7 @@
     let simplex;
     let noise_grid;
 
-    const palette = get('hersche');
+    const palette = get('intlrailw');
 
     const grid_dim = 10;
     const padding = 0;
@@ -1635,7 +1648,7 @@
     }
 
     p.keyPressed = function() {
-      if (p.keyCode === 80) p.saveCanvas('sketch_' + THE_SEED, 'jpeg');
+      if (p.keyCode === 80) p.saveCanvas('elevation_' + THE_SEED, 'png');
     };
   };
   new p5(sketch);

@@ -1,0 +1,32 @@
+{
+  "name": "particulate",
+  "description": "Particle physics micro library.",
+  "version": "0.3.3",
+  "main": "dist/particulate.js",
+  "license": "MIT",
+  "keywords": [
+    "particle",
+    "physics",
+    "3d"
+  ],
+  "homepage": "http://particulatejs.org/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jpweeks/particulate-js.git"
+  },
+  "authors": [{
+    "name": "Jay Weeks",
+    "email": "jay.patrick.weeks@gmail.com",
+    "homepage": "http://jayweeks.com"
+  }],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "examples",
+    "src",
+    "test",
+    "Gruntfile.js",
+    "package.json"
+  ]
+}

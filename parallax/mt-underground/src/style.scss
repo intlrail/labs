@@ -1,0 +1,11 @@
+body {
+	height: 2000px;
+	background: black;
+}
+
+.scene {
+	position: absolute;
+	width: 100%;
+	transform: translateY(var(--translateY));
+	will-change: transform;
+}

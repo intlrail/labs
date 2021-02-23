@@ -2498,6 +2498,58 @@
   }
   var GUI$1 = GUI;
 
+  var intlrail = [
+
+{
+    name: 'intlrail-std',
+    colors: [
+        '#1c1c1e', '#242426', '#2c2c2e', '#363638'],
+    stroke: '#ffffff',
+    background: '#000000'
+    },
+
+{
+
+    name: 'intlrail-2',
+    colors: ['#3a3a3c', '#444446', '#48484a', '#545456'],
+    stroke: '#fff',
+    background: '#000',
+
+},
+
+
+{
+
+    name: 'intlrail-3',
+    colors: ['#636366', '#6c6c70', '#7c7c80', '#8e8e8e'],
+    stroke: '#fff',
+    background: '#000',
+
+},
+  {
+
+    name: 'intlrail-4',
+    colors: ['#8e8e93', '#aeaeb2', '#aeaeb2', '#bcbcc0'],
+    stroke: '#fff',
+    background: '#000',
+
+  },
+  {
+    name: 'intlrail-5',
+    colors: ['#c7c7cc', '#d1d1d6', '#d8d8dc', '#e5e5ea'],
+    stroke: '#fff',
+    background: '#000',
+
+  },
+  {
+    name: 'intlrail-6',
+    colors: ['#aeaeae', '#ebebf0', '#f2f2f7', '#f8f8fe'],
+    stroke: '#fff',
+    background: '#000',
+
+  },
+];
+
   var misc = [
 
     {

@@ -1,0 +1,125 @@
+Interface to users
+Road network
+sources and routes
+models
+multi-lane roundabouts
+
+
+See also readme_intersections
+
+w/o less of generality 4-arms roundabout
+
+(1) Interface to users:
+======================
+
+* (a) fixed geometry (rather big, 1-lane arms) => .gnu file
+
+* (b) choiceboxes for type of roundabout:
+(i) mainroad+2 small secondary arms [1-3=main road, rel OD below:]
+    r13=r31=0.30,
+    r12=r21=r14=r41=r32=r32=r34=r43=0.04
+    r24=r42=0.04
+
+(ii) mainroad+1 secondary arm (second secondary arm 4 has empty traffic)
+    r13=r31=0.40,
+    r12=r21=r32=r32=0.05
+
+(iii) all 4 arms equal
+    rij=1/12 if (i !=j), rii=0
+
+(iv) only right turns
+    r12=r23=r34=r41=0.25, all other rij=0
+
+(v) only left turns
+    r21=r32=r43=r14=0.25, all other rij=0
+
+* (c) toggle for changing the traffic rules ring priority<->right priority
+
+* (d) slider for overall traffic flow (sum of OD) and the usual other sliders
+
+
+(2) Road network
+================
+
+link 1: ring with 4 onramps, 4 offramps, empty IC, special provision
+        for offramp over "ring seam"
+	
+links 2-3,4-5,6-7,8-9: 2 links per arm, empty IC
+
+geometry link 1: circle radius r, center (0,0), roadwidth w<r
+
+geometry link 2: (in, west) length3*r => .gnu file
+
+geometry links 3-9: similar => .gnu file
+
+(3) sources and routes
+======================
+
+each source at link 2,4,6,8 has 3 routes:
+
+OD	route
+12	2-1-5
+13	2-1-7
+14	2-1-9
+21	4-1-3
+23	4-1-7
+24	4-1-9
+31	6-1-3
+32	6-1-5
+34	6-1-9
+41	8-1-3
+42	8-1-5
+43	8-1-7
+
+
+(4) models
+==========
+
+link 1: v01=min(v0, sqrt(b*r)), no restriction @ offramps
+
+links 2,4,6,8:
+  slider-controlled v0 for arclength s<length-pi/4*r1-(v02^2-v01^2)/2b, 
+  v01 otherwise,
+  ramp of length pi/4*r1 starting at s=length-3/8*pi*r1
+  and ending at s=length-1/8*pi*r1 (rest of link just for
+  graph. purposes)
+  separate logical lane change (starting at s=length-3/8*pi*r1) from
+  optical change: Only if new mainroad vehicle arrives at
+  s_link1=pi/4*r1 corresponding  to s_link2=length
+  s_link1=pi/2*r+pi/4*r1 corresponding  to s_link4=length
+  ...
+  otherwise use new method drawVehicleAtLink(l,s)
+
+links 3,5,7,9:
+  v01 for arclength s<pi/4*r1
+  slider-controlled v0 otherwise
+
+Done!
+
+
+5. Multi-lane roundabouts
+=========================
+
+(from book->mails*)
+
+
+Hello Ibanez,
+
+multi-lane roundabouts are inherently significantly more complicated compared to single-lane roundabouts and imply several extra traffic rules that's why a simulation will not work by just adding new lanes (which, in other siduations, is simple: just use the blue German Autobahn "lane+" and "lane-" buttons; the implementation does not limit the number of lanes).  For a two-lane ring and also for all access and exit segments, they are (assuming right-handed traffic flow):
+
+(1) When going right, use the right access lane, when going left or around, the left lane, when going straight ahead, you can chose either access lane. This means, when going left, you can only enter if the gaps at *both* ring lanes are large enough
+
+(2) Enter the exit segment on the same lane as you did at the access, i.e., you will end up on the left exit lane when making a left or U turn, and on the right when making a right turn
+
+(3) Besides the priority of the ring, the inner ring lane has priority over the outer ring lane. This is necessary to allow inner-ring vehicles exit the ring by  crossing the right ring lane which may be used by some drivers going straight ahead (the right-turners are no problem because of Rules 1 and 2)
+
+When looking at real multi-lane roundabouts (just picture-search  this term) you will see that the proposed pure form rarely exists. There are designs with sub-roundabouts, "turbo" roundabouts, roundabouts with traffic lights (making void the whole idea of a roundabout), and many more. 
+
+The reason for the complications is the time-critical crossing when exiting from the left lane. If there were more space (as in the huge roundabouts in Paris with several hundred meters diameter), you could simulate multi-lane roundabouts just by a multi-lane freeway as ring with multi-lane onramps and offramps and let the drivers coordinate themselves by the lane-changing model. This only implies multi-lane onramps and offramps which I plan to do in the near future, including the roundabout.
+
+However, I am afraid that I do not have time to implement the above special rules  necessary for effective multi-lane roundabout operations. Anyway, while roundabouts are a good idea for less crowded intersections (particularly if there are more than four arms) or as a means to prevent speeding, signal-regulated intersections are the better choice as soon as more than one lane is needed to accommodate the demand
+
+Best,
+
+
+Martin

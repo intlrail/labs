@@ -1,0 +1,25 @@
+{
+  "globals": {
+    "require"      : true,
+    "lib"          : true,
+    "Particulate"  : true,
+    "QUnit"        : true
+  },
+
+  "asi"            : true,
+  "browser"        : true,
+  "curly"          : true,
+  "esnext"         : true,
+  "eqeqeq"         : true,
+  "eqnull"         : true,
+  "forin"          : true,
+  "indent"         : 2,
+  "latedef"        : "nofunc",
+  "maxcomplexity"  : 10,
+  "maxdepth"       : 3,
+  "newcap"         : true,
+  "noarg"          : true,
+  "quotmark"       : "single",
+  "undef"          : true,
+  "unused"         : "vars"
+}
