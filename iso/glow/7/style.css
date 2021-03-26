@@ -1,0 +1,57 @@
+:lang(en) {
+    font-family: industry, sans-serif;
+}
+
+:lang(ko); {
+    font-family: source-han-sans-korean, sans-serif;
+}
+
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  background: #000;
+  background-blend-mode: difference;
+  background-position: bottom;
+}
+
+canvas {
+	width: 100%;
+	height: 100%;
+	padding-top: 50px;
+}
+
+.credits {
+	font-size: 24px;	
+	position: absolute;
+	top: 0;
+	left: 20px;
+	color: white;
+	text-align: left;
+}
+
+
+.description {
+	
+	position: absolute;
+	bottom: 20px;
+	right: 50px;
+	color: white;
+	margin-left: 70%;
+	font-size: 16px;
+	font-weight: 400;
+	text-align: right;
+}
+
+.logo {
+	height: 60px;
+    float: left;
+    margin-right:1rem;
+}

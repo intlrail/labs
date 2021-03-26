@@ -1,0 +1,72 @@
+
+body {
+    font-family:sans-serif;
+    background:#000;
+    color:#eeeeee;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow: none;
+}
+
+header, footer, aside, nav {
+    display: block;
+}
+
+a:link {color:#777777;}
+a:visited {color:#777777;}
+a:hover {color:#999999;}
+a:active {color:#ffffff;}
+
+.remark {
+    color: #ffffff;
+}
+
+.unsafe {
+    color : #c86464;
+}
+
+#simulation {
+    display: table;
+    margin: 0 auto;
+    /*border:1px solid;*/
+    box-shadow: 10px 10px 7px #222;
+}
+
+    #simulation .viewer {
+        display:table-cell;
+    }
+    
+    #simulation .panel {
+        display: table-cell;
+        vertical-align:top;
+        width: 10%;
+        padding: 0px 5px 0px 5px;
+        font-size: 9pt;
+        background:#101010;
+    }
+        #simulation .panel header {
+            color: #ffffff;
+        }
+        
+    	#simulation .panel .slider {
+    		margin: 7px 10px 10px 10px;
+    	}
+        #simulation .panel section {
+            margin-bottom: 15px;
+            border-bottom: 1px dotted;
+        }
+        #simulation .panel section:last-child {
+            margin-bottom: 0px;
+            border-bottom: 0px;
+        }
+
+
+#myCanvas {
+    display:block;
+    width:100%;
+    height:100%;
+    margin: auto 0;
+    vertical-align:bottom;
+    background-color:#101010;
+}
