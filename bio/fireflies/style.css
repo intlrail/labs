@@ -20,11 +20,13 @@ a {
 }
 
 #side {
+    display:block;
     width: 250px;
     background-color: rgba(0,0,0, 0.8);
     color: #fff;
     padding: 25px;
     overflow: auto;
+    z-index: 100;
 }
 
 #side h3 {

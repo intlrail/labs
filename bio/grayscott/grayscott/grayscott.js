@@ -36,7 +36,7 @@ var mMinusOnes = new THREE.Vector2(-1, -1);
 
 // Some presets.
 var presets = [
-    { // Default
+    { // Standard
         //feed: 0.018,
         //kill: 0.051
         feed: 0.037,

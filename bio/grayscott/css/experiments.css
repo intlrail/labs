@@ -9,10 +9,6 @@ body {
     overflow: none;
 }
 
-header, footer, aside, nav {
-    display: block;
-}
-
 a:link {color:#777777;}
 a:visited {color:#777777;}
 a:hover {color:#999999;}
@@ -27,24 +23,28 @@ a:active {color:#ffffff;}
 }
 
 #simulation {
-    display: table;
+    display: flex;
     margin: 0 auto;
     /*border:1px solid;*/
-    box-shadow: 10px 10px 7px #222;
+    /*box-shadow: 10px 10px 7px #222;*/
 }
 
     #simulation .viewer {
-        display:table-cell;
+        width:100vw;
+        height:100vh;
     }
     
-    #simulation .panel {
-        display: table-cell;
+    /*#simulation aside.panel {
+        height:10%;
+        display: block;
         vertical-align:top;
-        width: 10%;
-        padding: 0px 5px 0px 5px;
         font-size: 9pt;
-        background:#101010;
-    }
+        background:rgba(0,0,0,0.1);
+    }*/
+        .panel {
+            display: none;
+        }
+
         #simulation .panel header {
             color: #ffffff;
         }
@@ -62,10 +62,11 @@ a:active {color:#ffffff;}
         }
 
 
-#myCanvas {
-    display:block;
-    width:100%;
-    height:100%;
+canvas#myCanvas {
+    display:flex;
+    flex-grow: 1;
+    width:100vw;
+    height:100vh;
     margin: auto 0;
     vertical-align:bottom;
     background-color:#101010;

@@ -1,37 +1,34 @@
 let sketch = function(p) {
   let xdim = 5;
-  let ydim = 5;
-  let size = 25;
-
+  let ydim = 20;
+  let size = 15;
   let vseps;
   let hseps;
-
   p.setup = function() {
     p.createCanvas(innerWidth, innerHeight);
-
     p.noLoop();
-    //p.background(230,255,172);
     p.noFill();
+
   }
 
   p.draw = function() {
     p.clear();
-    p.translate(40,40);
-    for (var i = 0; i < 4; i++) {
+    p.translate(10,10);
+    for (var i = 0; i < 10; i++) {
       p.push();
-      for (var j = 0; j < 4; j++) {
+      for (var j = 0; j < 10; j++) {
         generate_grid(xdim + j, ydim + i);
 
-        p.strokeWeight(8);
+        p.strokeWeight(1);
         p.stroke(0);
         display(xdim + j, ydim + i);
-        p.strokeWeight(4);
-        p.stroke(190,190,190);
+        p.strokeWeight(1);
+        p.stroke(255);
         display(xdim + j, ydim + i);
         p.translate(150 + (j * size), 0);
       }
       p.pop();
-      p.translate(0, 150 + (i * size));
+      p.translate(0, 10 + (i * size));
     }
   }
 
@@ -55,7 +52,7 @@ let sketch = function(p) {
 
   function display(xd,yd) {
     p.push();
-    p.rect(0,0,xd * size, yd * size);
+    p.rect(0, 0, xd * size, yd * size);
 
     for (var j = 1; j < xd; j++) {
       if (vseps[0][j-1] === 1) p.line(j * size, 0, j * size, size);
@@ -71,6 +68,8 @@ let sketch = function(p) {
     }
     p.pop()
   }
+
+
 
   function randomly_fill_remaining_vseps(arr) {
     for (var i in arr) {
@@ -104,10 +103,6 @@ let sketch = function(p) {
     return p.random() < .6 ? 0:1
   }
 
-  p.keyPressed = function() {
-    if (p.keyCode === 80) p.saveCanvas('grid_' + THE_SEED, 'png');
-  }
-
   function display_ascii() {     
     for (var r = 0; r < ydim - 1; r++) {
       var s = "|";
@@ -136,6 +131,7 @@ let sketch = function(p) {
 
     console.log(s);
   }
+
 };
 
 new p5(sketch);

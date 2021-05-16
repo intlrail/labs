@@ -2,15 +2,15 @@
 const SVG = opt => {
 	let target = null;
 	let offset = 0;
-	let px = -1;
-	let py = -1;
+	let px = 0;
+	let py = 0;
 	let iter = 0;
 	let font = null;
 	let cpuTime = 6;
 	let polyline = [];
 	let init = () => {};
 	const polylines = [];
-	let matrixTransform = false;
+	let matrixTransform = true;
 	const autorun = () => {
 		if (typeof setup === "function") init = setup;
 		init();
@@ -40,7 +40,7 @@ const SVG = opt => {
 		inside.setAttribute(
 			"style",
 			`fill:none;stroke:${opt.stroke || "#ffffff"};stroke-width:${opt.strokeWidth ||
-				0.1};opacity:${opt.opacity || 1}`
+				0.2};opacity:${opt.opacity || 1}`
 		);
 		svgElem.appendChild(inside);
 		target = inside;
@@ -534,7 +534,7 @@ const SVG = opt => {
 			polyline = newLine;
 			polylineSVG();
 		}
-		saveFile(svgElem, (opt.name || "codepen") + ".svg");
+		saveFile(svgElem, (opt.name || "fractalscan") + ".svg");
 	};
 	const saveFile = (svgEl, name) => {
 		svgEl.setAttribute("xmlns", "http://www.w3.org/2000/svg");

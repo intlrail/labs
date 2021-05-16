@@ -612,7 +612,7 @@
             w: cell_w,
             h: cell_h,
             level: 1,
-            filled: false,
+            filled: true,
           };
           const content = apparatus.map((app) => ({
             ...app,

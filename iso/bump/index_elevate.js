@@ -575,13 +575,13 @@
   let sketch = function(p) {
     let THE_SEED;
 
-    const mag = 10;
+    const mag = 5;
     const xu = [1 * mag, -0.5 * mag]; // X Unit
     const yu = [1 * mag, 0.5 * mag]; // Y Unit
-    const zu = [0 * mag, 0.5 * mag]; // Z Unit
+    const zu = [0 * mag, -0.8660 * mag]; // Z Unit
 
     const palette = get_palette();
-    const generator = new index(50, 5, {
+    const generator = new index(25, 25, {
       simple: true,
       extension_chance: 0.618,
       horizontal_symmetry: false,
@@ -589,7 +589,7 @@
     });
 
     const innerApparatusOptions = {
-      simple: true,
+      simple: false,
       extension_chance: 0.8,
       horizontal_symmetry: false,
       vertical_chance: 0.9,
@@ -609,7 +609,7 @@
       p.noLoop();
       p.background(palette.background ? palette.background : '#111');
       p.strokeJoin(p.ROUND);
-      p.strokeWeight(0.2);
+      p.strokeWeight(0.1);
       p.stroke(palette.stroke ? palette.stroke : '#eee');
     };
 

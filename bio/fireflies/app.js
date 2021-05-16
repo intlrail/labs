@@ -20,11 +20,11 @@ function gaussian(mu, sigma) {
 var N = 64;
 var count = N * N;
 var period = 1;
-var speed = 0.5;
+var speed = 0.15;
 var threshold = f(period);
 var influence = 0.003;
 var similarity = 0;
-var scatter = false;
+var scatter = true;
 var lastUpdate = 0;
 var values = [];
 var weights = [];

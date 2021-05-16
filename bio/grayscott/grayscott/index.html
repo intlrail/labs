@@ -10,7 +10,7 @@
         <script type="text/javascript" src="../3rd/colorPicker.js"></script>
         <script type="text/javascript" src="../3rd/three.min.js"></script>
         <script type="text/javascript" src="../gradientui/gradientui.js"></script>
-        <!--script type="text/javascript" src="http://mrdoob.github.com/three.js/build/three.min.js"></script-->
+        <!-- <script type="text/javascript" src="http://mrdoob.github.com/three.js/build/three.min.js"></script> -->
         <script type="x-shader/x-vertex" id="standardVertexShader">
             varying vec2 vUv;
             
@@ -144,7 +144,6 @@
                 // KLUDGE!
                 colorPicker.offsetX = -512;
                 colorPicker.offsetY = -256;
-                
                 document.getElementById("gradient").onselectstart = function () {return false;};
                 
                 init();
@@ -153,8 +152,8 @@
     </head>
     <body>
         <div id="simulation">
-        <canvas id="myCanvas" class="viewer" style="width:1024px;height:1024px"></canvas>
-        <aside class="panel">
+        <canvas id="myCanvas" class="viewer"></canvas>
+        <div class="panel">
             <section id="instructions">
                 <header><h4>Instructions</h4></header>
                 <ol>
@@ -169,7 +168,7 @@
                     Presets:
                     <select name="scene" style="width:100%"
                         onchange="loadPreset(document.ex.scene.selectedIndex)">
-                        <option value="0" selected="selected">Default</option>
+                        <option value="0" selected="selected">Standard</option>
                         <option value="1">Solitons</option>
                         <option value="2">Pulsating solitons</option>
                         <option value="3">Worms</option>
@@ -201,7 +200,7 @@
                 <div style="font-size:x-small">Share (paste and press enter):</div>
                 <div style="text-align:center"><input id="share" style="width:85%"/></div>
             </section>
-        </aside>
+        </div>
         </div>
         <footer>
                 

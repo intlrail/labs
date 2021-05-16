@@ -79,10 +79,10 @@ let sketch = function(p) {
     }
     return narr;
   };
-
+`
   p.keyPressed = function() {
     if (p.keyCode === 80) p.saveCanvas('horizon_' + THE_SEED, 'png');
   };
-
+`
 };
 new p5(sketch);

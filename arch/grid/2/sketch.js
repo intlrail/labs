@@ -1,11 +1,9 @@
 let sketch = function(p) {
-  let xdim = 10;
-  let ydim = 8;
-  let size = 20;
-
+  let xdim = 40;
+  let ydim = 30;
+  let size = 50;
   let grid;
   let colors;
-
 
   p.setup = function() {
     p.createCanvas(innerWidth,innerHeight);
@@ -13,10 +11,10 @@ let sketch = function(p) {
     p.noFill();
 
     colors = [
-      p.color(231,94,96),
-      p.color(249,190,82),
-      p.color(89,180,180),
-      p.color(197,149,197)
+      p.color(110,110,110),
+      p.color(94,94,94),
+      p.color(60,60,60),
+      p.color(20,20,20)
     ];
   }
 
@@ -24,15 +22,15 @@ let sketch = function(p) {
     p.clear();
     //p.translate(-size/2, -size/2);
     generate_grid(xdim, ydim);
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < 20; i++) {
       p.push();
-      for (var j = 0; j < 9; j++) {
-        p.strokeWeight(6);
+      for (var j = 0; j < 10; j++) {
+        p.strokeWeight(2);
         p.stroke(colors[p.floor(p.random(4))]);
-        //p.fill(colors[p.floor(p.random(4))]);
+        p.fill(colors[p.floor(p.random(4))]);
         display(p.min(j,4), p.min(i,3), 3 + dist(4,j) , 3 + dist(3,i));
         p.strokeWeight(2);
-        p.stroke(20,39,49);
+        // p.stroke(60,60,60);
         p.noFill();
         display(p.min(j,4), p.min(i,3), 3 + dist(4,j) , 3 + dist(3,i));
 
@@ -48,7 +46,7 @@ let sketch = function(p) {
     for (var i = 0; i < grid.length; i++) {
       grid[i] = new Array(xd + 1);
       for (var j = 0; j < grid[i].length; j++) {
-        if (i == 0 || j == 0) grid[i][j] = {h:false, v:false};
+        if (i == 0 || j == 0) grid[i][j] = {h:true, v:true};
         else if (i == 1 && j == 1) grid[i][j] = {h:true, v:true};
         else grid[i][j] = generate_cell(grid[i][j-1].h, grid[i-1][j].v);
       }
@@ -75,7 +73,7 @@ let sketch = function(p) {
   }
 
   function flip_coin() {
-    return p.random() < .6 ? false:true
+    return p.random() < 0.5 ? false:true
   }
 
   function dist (n, m) {

@@ -11,8 +11,6 @@ var sketch = function (p) {
 
   p.setup = function() {
     p.createCanvas(w, h);
-    p.stroke(255,255,255);
-
     for (var i = 0; i < n; i++) {
       particles.push({
           pos: p.createVector(p.random(w), p.random(h)),
@@ -22,6 +20,7 @@ var sketch = function (p) {
     }
   };
 
+
   p.draw = function() {
     particles.forEach( function(prtcl) {
       ui.display(p, prtcl.pos, prtcl.vel);
@@ -30,5 +29,11 @@ var sketch = function (p) {
     t += 0.s2;
   };
 };
+
+  p.keyPressed = function() {
+    if (p.keyCode === 80) {
+      p.saveCanvas('atmoperlin', 'png');
+    }
+  };
 
 new p5(sketch);
