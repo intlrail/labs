@@ -1,7 +1,7 @@
 let sketch = function(p) {
   let xdim = 5;
   let ydim = 20;
-  let size = 15;
+  let size = 10;
   let vseps;
   let hseps;
   p.setup = function() {
@@ -18,7 +18,6 @@ let sketch = function(p) {
       p.push();
       for (var j = 0; j < 10; j++) {
         generate_grid(xdim + j, ydim + i);
-
         p.strokeWeight(1);
         p.stroke(0);
         display(xdim + j, ydim + i);
