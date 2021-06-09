@@ -5,4 +5,4 @@ navbar-links:
   Depts:
     - Ops: "https://beautifuljekyll.com"
     - Dev: "https://www.markdowntutorial.com/"
-theme: jekyll-theme-midnight
+theme: jekyll-theme-minimal
