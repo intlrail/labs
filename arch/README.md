@@ -1,6 +1,6 @@
-# IR Architecture Division
+# IR Department of Architecture
 
-The IR architecture division is solely responsible for researching and developing new designs for stationary and mobile habitable living spaces. For related developments, check out the [Residential Environment Science](http://labs.intlrail.org/res) and [infrastructure](http://labs.intlrail.org/infra) divisions.
+The IR architecture department is solely responsible for researching and developing new designs for stationary and mobile habitable living spaces. For related developments, check out the departments of [Residential Environment Science](http://labs.intlrail.org/res) and [infrastructure](http://labs.intlrail.org/infra).
 
 ## 🚆 /arch/grid
 
