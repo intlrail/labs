@@ -1,8 +1,10 @@
-title: International Rail Labs
-author: International Rail
+title: International Rail
+author: INTLRAIL
 navbar-links:
   Home: "https://intlrail.org"
+  
   Depts:
-    - Ops: "https://beautifuljekyll.com"
+    - Ops: 
     - Dev: "https://www.markdowntutorial.com/"
+
 theme: jekyll-theme-minimal
