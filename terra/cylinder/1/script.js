@@ -2,8 +2,8 @@
 const SVG = opt => {
     let target = null;
     let offset = 0;
-    let px = -1;
-    let py = -1;
+    let px = 0;
+    let py = 0;
     let iter = 0;
     let font = null;
     let cpuTime = 7;
@@ -32,8 +32,8 @@ const SVG = opt => {
         rect.setAttribute("stroke", "none");
         rect.setAttribute("x", 5);
         rect.setAttribute("y", 5);
-        rect.setAttribute("width", 190);
-        rect.setAttribute("height", 190);
+        rect.setAttribute("width", 16);
+        rect.setAttribute("height", 9);
         svgElem.appendChild(rect);
         const inside = document.createElementNS("http://www.w3.org/2000/svg", "g");
         inside.setAttribute("stroke-linejoin", "round");
@@ -72,7 +72,7 @@ const SVG = opt => {
                 if (saveText.innerHTML === "") return;
                 e.stopPropagation();
                 saveSVG();
-            }, false);
+            }, true);
         });
         requestAnimationFrame(autorun);
         return [svgElem, inside, outside, saveText];
@@ -80,7 +80,7 @@ const SVG = opt => {
     const [svgElem, inside, outside, saveText] = initSVG(opt);
     ///////////////////////////////////////////////////////////////////////////
     const start = () => {
-        matrixTransform = false;
+        matrixTransform = true;
         matrix.data = [1, 0, 0, 1, 0, 0];
         matrix.stack.length = 0;
         polyline = [];

@@ -11,14 +11,15 @@
   let tick;
 
   let cross_dim = 10;
-  let grid_size = 1000;
+  // use 0 ~ 50 for smooth run
+  let grid_size = 30;
   let cell_dim = 10;
-  let nheight = 1.218;
-  let nzoom = 10;
+  let nheight = 1.618;
+  let nzoom = 100;
 
   p.setup = function() {
-    p.createCanvas(500, 500);
-    p.stroke(255, 100);
+    p.createCanvas(innerWidth, innerHeight);
+    p.stroke(255, 168);
     tick = 0;
   };
 
@@ -26,7 +27,7 @@
     p.background('#000');
     p.translate(p.width / 2, p.height / 2);
     draw_grid();
-    tick += 0.05;
+    tick += 0.01;
   };
 
   function draw_grid() {

@@ -4,8 +4,8 @@
 var code = {
 	setup: {
 		background: '#000',
-		minimumSize: 0.5,
-		globalScale: 20
+		minimumSize: 0.382,
+		globalScale: 10
 	},
 	startShape: 'start',
 	start: {

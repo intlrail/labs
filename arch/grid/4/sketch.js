@@ -1,116 +1,126 @@
 let sketch = function(p) {
   let THE_SEED;
-  let xdim = 8;
-  let ydim = 8;
-  let size = 80;
-
-  let cgrid;
-  let cdimx = 2;
-  let cdimy = 2;
-
-  let grid;
-  let colors;
+  let poster_padding = 50;
+  let padding = 8;
+  let cutoff = 50;
+  let palette;
 
   p.setup = function() {
     p.createCanvas(innerWidth, innerHeight);
     THE_SEED = p.floor(p.random(9999999));
     p.randomSeed(THE_SEED);
     p.noLoop();
-    p.noFill();
-    //p.background('#eeeee8');
+    //p.background('#ecebe4');
+    p.strokeWeight(1);
+    p.rectMode(p.CORNERS);
 
-    cgrid = [];
-    for (var i = 0; i < cdimy; i++) {
-      crow = [];
-      for (var j = 0; j < cdimx; j++) {
-        crow.push(p.color(p.random(255), p.random(255), p.random(255)));
-      }
-      cgrid.push(crow);
-    }
-    console.log(cgrid);
+    palette = [
+      p.color('#c7c7cc'),
+      p.color('#6c6c70'),
+      p.color('#3a3a3c'),
+      p.color('#48484a'),
+      p.color('#e5e5ea'),
+      p.color('#2c2c2e'),
+      p.color('#444446')
+    ];
   };
 
   p.draw = function() {
-    p.translate(1,1);
-    generate_grid(xdim, ydim);
-    for (var i = 0; i < ydim - 1; i++) {
+    //p.background('#ebebe4');
+    p.translate(
+      poster_padding + (p.width - poster_padding * 2) / 10,
+      poster_padding + (p.height - poster_padding * 2) / 10
+    );
+    for (let i = 0; i < 5; i++) {
       p.push();
-      for (var j = 0; j < xdim - 1; j++) {
-        p.strokeWeight(2);
-        p.stroke(get_color(j, i));
-        display(p.min(j, 4), p.min(i, 3), 3 + dist(4, j), 3 + dist(3, i));
-        p.translate(1, 1);
-        p.strokeWeight(0.618);
-        //p.stroke('#444');
-        display(p.min(j, 4), p.min(i, 3), 3 + dist(4, j), 3 + dist(3, i));
-        p.translate(125 + dist(2, j) * size, 0);
+      for (let j = 0; j < 5; j++) {
+        draw_layout();
+        p.translate((p.width - poster_padding * 2) / 5, 0);
       }
       p.pop();
-      p.translate(0, 125 + dist(2, i) * size);
+      p.translate(0, (p.height - poster_padding * 2) / 5);
     }
   };
 
-  function generate_grid(xd, yd) {
-    grid = new Array(yd + 1);
-    for (var i = 0; i < grid.length; i++) {
-      grid[i] = new Array(xd + 1);
-      for (var j = 0; j < grid[i].length; j++) {
-        if (i == 0 || j == 0) grid[i][j] = { h: false, v: false };
-        else if (i == 1 && j == 1) grid[i][j] = { h: true, v: true };
-        else grid[i][j] = generate_cell(grid[i][j - 1].h, grid[i - 1][j].v);
-      }
+  function draw_layout() {
+    let w = p.random(100, 150);
+    let h = p.random(100, 150);
+    draw_block(p.createVector(-w / 2, -h / 2), p.createVector(w / 2, h / 2));
+  }
+  function draw_section(v1, v2) {
+    if (v2.x - v1.x < cutoff || v2.y - v1.y < cutoff) {
+      draw_block(v1, v2);
+      return;
+    }
+    let decide = p.random();
+
+    if (decide < 0.5) {
+      draw_block(v1, v2);
+    } else if (decide < 0.95) {
+      split_section(v1, v2);
+    } else {
+      //NOTHING, FOR NOW...
     }
   }
 
-  function generate_cell(west, north) {
-    if (!west && !north) return { h: false, v: false };
-    if (!west) return { h: flip_coin(), v: true };
-    if (!north) return { h: true, v: flip_coin() };
-    let h = flip_coin();
-    let v = h ? flip_coin() : true;
-    return { h: h, v: v };
-  }
+  function draw_block(v1, v2) {
+    if (v2.x - v1.x < cutoff || v2.y - v1.y < cutoff) {
+      draw_rectangle(v1, v2);
+      return;
+    }
+    let decide = p.random();
 
-  function get_color(x, y) {
-    let px = x / (xdim - 1) * (cdimx - 1);
-    let py = y / (ydim - 1) * (cdimy - 1);
-
-    let px0 = p.floor(px);
-    let py0 = p.floor(py);
-
-    let sx = p.map(px, px0, px0 + 1, 0, 1);
-    let sy = p.map(py, py0, py0 + 1, 0, 1);
-
-    let cu = p.lerpColor(cgrid[py0][px0], cgrid[py0][px0 + 1], sigmoid(sx));
-    let cl = p.lerpColor(cgrid[py0 + 1][px0], cgrid[py0 + 1][px0 + 1], sigmoid(sx));
-    return p.lerpColor(cu, cl, sigmoid(sy));
-  }
-
-  function sigmoid(x) {
-    return 1.1 / (1 + p.exp(-6 * (x - 0.5))) - 0.05;
-  }
-
-  function display(x1, y1, sx, sy) {
-    p.rect(size, size, (sx - 1) * size, (sy - 1) * size);
-    for (var i = 1; i < sy; i++) {
-      for (var j = 1; j < sx; j++) {
-        if (grid[y1 + i][x1 + j].h) p.line(j * size, i * size, (j + 1) * size, i * size);
-        if (grid[y1 + i][x1 + j].v) p.line(j * size, i * size, j * size, (i + 1) * size);
-      }
+    if (decide < 0.4) {
+      draw_rectangle(v1, v2);
+      draw_section(p.createVector(v1.x + padding, v1.y + padding), p.createVector(v2.x - padding, v2.y - padding));
+    } else if (decide < 0.95) {
+      split_block(v1, v2);
+    } else {
+      draw_rectangle(v1, v2);
     }
   }
 
-  function flip_coin() {
-    return p.random() < 0.54 ? false : true;
+  function split_section(v1, v2) {
+    let cut_dir = get_cut_direction(v1, v2);
+    if (cut_dir == 'H') {
+      let pivot = get_cut_pos(v1.y, v2.y);
+      draw_section(v1, p.createVector(v2.x, pivot - padding / 2));
+      draw_section(p.createVector(v1.x, pivot + padding / 2), v2);
+    } else {
+      let pivot = get_cut_pos(v1.x, v2.x);
+      draw_section(v1, p.createVector(pivot - padding / 2, v2.y));
+      draw_section(p.createVector(pivot + padding / 2, v1.y), v2);
+    }
   }
 
-  function dist(n, m) {
-    return p.max(n - m, m - n);
+  function split_block(v1, v2) {
+    let cut_dir = get_cut_direction(v1, v2);
+    if (cut_dir == 'H') {
+      let pivot = get_cut_pos(v1.y, v2.y);
+      draw_block(v1, p.createVector(v2.x, pivot));
+      draw_block(p.createVector(v1.x, pivot), v2);
+    } else {
+      let pivot = get_cut_pos(v1.x, v2.x);
+      draw_block(v1, p.createVector(pivot, v2.y));
+      draw_block(p.createVector(pivot, v1.y), v2);
+    }
+  }
+
+  function draw_rectangle(v1, v2) {
+    p.fill(palette[p.floor(p.random(palette.length))]);
+    p.rect(v1.x, v1.y, v2.x, v2.y);
+  }
+
+  function get_cut_direction(v1, v2) {
+    return v2.x - v1.x < v2.y - v1.y ? 'H' : 'V';
+  }
+
+  function get_cut_pos(p1, p2) {
+    return p.constrain(p.randomGaussian((p1 + p2) / 2, (p2 - p1) / 8), p1 + 20, p2 - 20);
   }
 
   p.keyPressed = function() {
-    if (p.keyCode === 80) p.saveCanvas('grid4_' + THE_SEED, 'png');
+    if (p.keyCode === 80) p.saveCanvas('grid6_' + THE_SEED, 'png');
   };
 };
-
 new p5(sketch);

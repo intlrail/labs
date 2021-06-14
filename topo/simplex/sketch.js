@@ -2,10 +2,10 @@ let sketch = function(p) {
   let tick;
 
   let cross_dim = 1;
-  let grid_size = 10;
-  let cell_dim = 2;
+  let grid_size = 1;
+  let cell_dim = 1;
   let nheight = 1.6;
-  let nzoom = 10;
+  let nzoom = 1;
 
   p.setup = function() {
     p.createCanvas(innerWidth, innerHeight);

@@ -1,53 +1,37 @@
 let sketch = function(p) {
   let THE_SEED;
-  let poster_padding = 50;
-  let padding = 8;
-  let cutoff = 50;
+  let padding = 16;
+  let cutoff = 72;
   let palette;
 
   p.setup = function() {
-    p.createCanvas(1400, 1400);
+    p.createCanvas(innerWidth, innerHeight);
+    //p.frameRate(2);
     THE_SEED = p.floor(p.random(9999999));
     p.randomSeed(THE_SEED);
-    p.noLoop();
-
-    //p.background('#ecebe4');
-    p.strokeWeight(2);
+    p.strokeWeight(4);
     p.rectMode(p.CORNERS);
 
     palette = [
-      p.color('#ffd84c'),
-      p.color('#ff7a52'),
-      p.color('#8ecaca'),
-      p.color('#ecebe4'),
-      p.color('#ecebe4'),
-      p.color('#ecebe4'),
-      p.color('#ecebe4')
+      p.color('#dd6853'),
+      p.color('#0aa2c0'),
+      p.color('#e88b17'),
+      p.color('#f7e868'),
+      p.color('#87c6be'),
+      p.color('#7d6b9f'),
+      p.color('#f7f7f7')
     ];
   };
 
   p.draw = function() {
     //p.background('#ebebe4');
-    p.translate(
-      poster_padding + (p.width - poster_padding * 2) / 10,
-      poster_padding + (p.height - poster_padding * 2) / 10
-    );
-    for (let i = 0; i < 5; i++) {
-      p.push();
-      for (let j = 0; j < 5; j++) {
-        draw_layout();
-        p.translate((p.width - poster_padding * 2) / 5, 0);
-      }
-      p.pop();
-      p.translate(0, (p.height - poster_padding * 2) / 5);
-    }
+    let w = p.random(250, 400);
+    let h = p.random(250, 400);
+    p.translate(p.width / 2, p.height / 2);
+    draw_block(p.createVector(-w / 2, -h / 2), p.createVector(w / 2, h / 2));
+    p.noLoop()
   };
 
-  function draw_layout() {
-    let w = p.random(100, 150);
-    let h = p.random(100, 150);
-    draw_block(p.createVector(-w / 2, -h / 2), p.createVector(w / 2, h / 2));
-  }
   function draw_section(v1, v2) {
     if (v2.x - v1.x < cutoff || v2.y - v1.y < cutoff) {
       draw_block(v1, v2);
@@ -121,7 +105,7 @@ let sketch = function(p) {
   }
 
   p.keyPressed = function() {
-    if (p.keyCode === 80) p.saveCanvas('grid6_' + THE_SEED, 'png');
+    if (p.keyCode === 80) p.saveCanvas('grid5_' + THE_SEED, 'png');
   };
 };
 new p5(sketch);

@@ -1,7 +1,13 @@
 let sketch = function(p) {
   let xdim = 5;
+<<<<<<< Updated upstream
   let ydim = 20;
   let size = 10;
+=======
+  let ydim = 5;
+  let size = 20;
+
+>>>>>>> Stashed changes
   let vseps;
   let hseps;
   p.setup = function() {
@@ -13,6 +19,7 @@ let sketch = function(p) {
 
   p.draw = function() {
     p.clear();
+<<<<<<< Updated upstream
     p.translate(10,10);
     for (var i = 0; i < 10; i++) {
       p.push();
@@ -23,11 +30,31 @@ let sketch = function(p) {
         display(xdim + j, ydim + i);
         p.strokeWeight(1);
         p.stroke(255);
+=======
+    p.translate(5, 5);
+    for (var i = 0; i < 12; i++) {
+      p.push();
+      for (var j = 0; j < 12; j++) {
+        generate_grid(xdim + j, ydim + i);
+
+      //outer border stroke
+        p.strokeWeight(2);
+        p.stroke(200,200,200);
+        display(xdim + j, ydim + i);
+
+      //inner border fill
+        p.strokeWeight(1);
+        p.stroke(120,120,120);
+>>>>>>> Stashed changes
         display(xdim + j, ydim + i);
         p.translate(150 + (j * size), 0);
       }
       p.pop();
+<<<<<<< Updated upstream
       p.translate(0, 10 + (i * size));
+=======
+      p.translate(0, 125 + (i * size));
+>>>>>>> Stashed changes
     }
   }
 
@@ -102,6 +129,13 @@ let sketch = function(p) {
     return p.random() < .6 ? 0:1
   }
 
+<<<<<<< Updated upstream
+=======
+  p.keyPressed = function() {
+    if (p.keyCode === 80) p.saveCanvas('grid1_' + THE_SEED, 'png');
+  }
+
+>>>>>>> Stashed changes
   function display_ascii() {     
     for (var r = 0; r < ydim - 1; r++) {
       var s = "|";

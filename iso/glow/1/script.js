@@ -145,8 +145,9 @@ function reset() {
     });
     ctx.save();
     ctx.translate(w / 2, h / 2);
-    ctx.scale(1, 0.62);
-    ctx.rotate(Math.PI / 4);
+    ctx.scale(1, 0.5);
+    ctx.rotate(45 * Math.PI / 180);
+
     var d = [],
         f = [],
         n = [];
@@ -154,7 +155,7 @@ function reset() {
     c.forEach(function (e, g) {
         var k = new Point(e.x + e.w / 2, e.y + e.h / 2);
         if (circleContainsPoint(k, a) && !(Math.random() > 2 * (1 - distance(k, a) / a.radius)))
-            if (e.area < Math.pow(6, 3))
+            if (e.area < Math.pow(2, 4))
                 e.split().forEach(function (l) {
                     b = offsetPolygon(l.points.concat(), 4);
                     l.points = b;
@@ -165,7 +166,7 @@ function reset() {
                     ctx.lineTo(b[0].x, b[0].y);
                     n.push(l);
                 });
-            else if (e.area < Math.pow(120, 2.5))
+            else if (e.area < Math.pow(12, .5))
                 e.split().forEach(function (l) {
                     b = offsetPolygon(l.points.concat(), 4);
                     l.points = b;
@@ -203,7 +204,7 @@ function reset() {
     ctx.save();
     ctx.clip();
     ctx.shadowBlur = 10;
-    ctx.shadowColor = "purple";
+    ctx.shadowColor = "yellow";
     ctx.fillRect(-w, -h, 2 * w, 2 * h);
     d.forEach(function (e, g) {
         e.stairs(ctx, g);
@@ -222,10 +223,10 @@ function reset() {
             for (var l = 0; 10 > l; l++) ctx.translate(k, k), (ctx.globalAlpha = 1 - l / b), e.draw(ctx), ctx.fill();
             ctx.restore();
         } else {
-            ctx.globalAlpha = 1;
+            // ctx.globalAlpha = 1;
             ctx.globalAlpha = 0.15;
-            ctx.fillStyle = "#111";
-            ctx.shadowBlur = 125;
+            ctx.fillStyle = "#1c1c1e";
+            ctx.shadowBlur = 5;
             ctx.shadowColor = "white";
             ctx.save();
             b = k = 1;
@@ -235,9 +236,9 @@ function reset() {
         }
     });
     n.forEach(function (e) {
-        ctx.globalAlpha = 0.382;
+        // ctx.globalAlpha = 0.382;
         ctx.globalAlpha = 0.56;
-        ctx.shadowBlur = 12;
+        ctx.shadowBlur = 6;
         ctx.shadowColor = "#ffdd1a";
         var g = 20 + 300 * Math.random();
         ctx.save();
@@ -262,7 +263,7 @@ function reset() {
     })(32, m.data, w, h);
     ctx.putImageData(m, 0, 0);
     ctx.restore();
-    ctx.globalAlpha = 1;
+    ctx.globalAlpha = 0.618;
     ctx.fillStyle = "#fff";
     ctx.font = "12px verdana";
     ctx.fillText("click to reset", 16, h - 16);

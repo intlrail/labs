@@ -195,7 +195,7 @@ function reset() {
   ctx.save();
   ctx.translate(w / 2, h / 2);
   ctx.scale(1 * s, 0.62 * s);
-  ctx.rotate(Math.PI / 4);
+  ctx.rotate(45 * Math.PI / 180);
 
   var rects = [];
   var small = [];

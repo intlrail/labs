@@ -1,180 +1,128 @@
-//global vars
-var rgb1,rgb2,rgb3;
-var r,g,b,a;
+// Note: This is just my attempt to understanding how to do this.
+// If you want a proper implementation, use https://github.com/qiao/fractal-terrain-generator
 
-//random number generator
-function randNum(from, to) {
-  return Math.floor(Math.random() * (to - from + 1) + from);
-}
-
-//random color generator
-function randColor(){
-  var rrr = randNum(0,255);
-  var ggg = randNum(0,255);
-  var bbb = randNum(0,255);
-	
-  go(rrr,ggg,bbb);
-}
-
-//correct for numbers over 255 and under 0
-function corrected(x){
-  var val = (x*1);
-  if(val > 255){
-    return 255;
-  } else if (val < 0){
-    return 0;
-  } else {
-    return Math.round(val);
-  }
-}
-
-//complimentary colors
-function complimentary(x){
-  return 255 - Math.abs((x - 127.5));
-}
-
-function go(r1,g1,b1){
-    
-	//random color is the background
-	
-	//get the complimentary colors
-  var rr = Math.round(complimentary(r1));
-  var gg = Math.round(complimentary(g1));
-  var bb = Math.round(complimentary(b1));
-	
-	//complimentary color is the terrain color
-	
-	a = 
-	
-	rgb1 = "rgb(" + r1 + "," + g1 + "," + b1 + ")";
-	
-	rgb2 = "rgb(" + rr + "," + gg + "," + bb + ")";
-	
-	rgb3 = "rgb(" + corrected(rr - 100) + "," + corrected(gg - 100) + "," + corrected(bb - 100) + ")";
-	
-	
-	terrainValues.bgColor = rgb1;
-	terrainValues.terrainColor[0] = rr;
-	terrainValues.terrainColor[1] = gg;
-	terrainValues.terrainColor[2] = bb;
-	terrainValues.terrainColor = rgb2;
-	terrainValues.lineColor = rgb3;
-	terrainValues.terrainOpacity = randNum(0,10) * 0.1;
-}
-
-var terrainValues = {
-  speed: 0,
-  rotation: 70,
-  mountainHeight: 100,
-  rotation: 70,
-  bgColor: [ 0, 0, 0 ],
-  lineColor: [ 241,241,241 ],
-  lineWidth: 0.618,
-  terrainColor: [ 0,0,0 ],
-  terrainOpacity: 0.618,
-	randomizeColors: function() { randColor() }
-}
-
-var cols, rows;
-var scl = 10;
-
-var w = window.innerWidth;
-var h = window.innerHeight;
-var cnvs;
-
-var flying = 0;
-
-//2D array where we'll store x and y values for each point on the triangle strip
-var terrain = [];
-
-window.onload = function() {
-  var gui = new dat.GUI();
-  gui.add(terrainValues,'speed', -0.3, 0.3);
-	gui.add(terrainValues,'rotation', 0, 90);
-	gui.add(terrainValues,'mountainHeight', 0, 300);
-	gui.add(terrainValues,'lineWidth', 0, 5);
-	gui.add(terrainValues,'terrainOpacity', 0, 1);
-	
-	var col = gui.addFolder('Colors');
-	col.add(terrainValues, 'randomizeColors');
-	col.addColor(terrainValues, 'bgColor');
-	col.addColor(terrainValues,'lineColor');
-	col.addColor(terrainValues, 'terrainColor');
+var Generator = function(segmentCount, zScaleStart, zScaleReduction) {
+  var geometry;
   
-};
-
-
-function setup() {
-  cnvs = createCanvas(w, h, WEBGL);
-  cols = 2*w / scl;
-	rows = 2*h / scl;
-
-	//https://stackoverflow.com/questions/966225/how-can-i-create-a-two-dimensional-array-in-javascript
-  for (var x = 0; x < cols; x++) {
-    terrain[x] = [];
-    for (var y = 0; y < rows; y++) {
-      terrain[x][y] = 0; //specify a default value for now
+  function initGeometry(size) {
+    geometry = new THREE.PlaneGeometry(size, size, segmentCount, segmentCount);
+    return geometry;
+  };
+  
+  function getVertexZAverage() {
+    var sum = 0; 
+    for (var i = 0; i < arguments.length; i++) {            
+      sum += getVertexZ(arguments[i][0], arguments[i][1]);      
+    }        
+    return sum / arguments.length;
+  };
+  
+  function generateVertexZ(x, y, average, zScale) {
+     var vertex = geometry.vertices[(y*(segmentCount + 1)) + x];
+     vertex.z = (average + zScale * (Math.random() - 0.5));
+     geometry.verticesNeedUpdate = true;
+  };
+  
+  function getVertexZ(x, y) {
+     var vertex = geometry.vertices[(y*(segmentCount + 1)) + x];
+     return vertex ? vertex.z : 0;
+  };
+  
+  function diamondSquareStep(square, zScale, next) {      
+    function diamond(centerX, centerY, half) {
+      var average = getVertexZAverage([centerX - half, centerY],
+                                      [centerX + half, centerY],
+                                      [centerX, centerY - half],
+                                      [centerX, centerY + half]);
+      generateVertexZ(centerX, centerY, average, zScale);
     }
+    
+    var half = (square.x2 - square.x1) / 2;
+    var centerX = square.x1 + half;
+    var centerY = square.y1 + half;
+    var average = getVertexZAverage([square.x1, square.y1],
+                                    [square.x2, square.y1],
+                                    [square.x1, square.y2],
+                                    [square.x2, square.y2]);        
+    generateVertexZ(centerX, centerY, average, zScale);
+    
+    diamond(square.x1, centerY, half); 
+    diamond(square.x2, centerY, half);  
+    diamond(centerX, square.y1, half);  
+    diamond(centerX, square.y2, half);
+    
+    if (half === 1)
+      return;
+    
+    next.push({x1: square.x1, x2: centerX, y1: square.y1, y2: centerY});
+    next.push({x1: square.x1, x2: centerX, y1: centerY, y2: square.y2});
+    next.push({x1: centerX, x2: square.x2, y1: square.y1, y2: centerY});
+    next.push({x1: centerX, x2: square.x2, y1: centerY, y2: square.y2});
   }
+  
+  var zScaleCurrent = zScaleStart;
+  var squares = [{x1: 0, y1: 0, x2: segmentCount, y2: segmentCount}];
+  function generateNextStep() {
+    var newSquares = [];
+    for (var i = 0; i < squares.length; i++) {
+      diamondSquareStep(squares[i], zScaleCurrent, newSquares);
+    }
+    
+    squares = newSquares;
+    zScaleCurrent /= zScaleReduction;
+    return squares.length > 0;
+  }
+  
+  return {
+    initGeometry : initGeometry,
+    generateNextStep : generateNextStep
+  };
 }
 
+var generator = new Generator(256, 256, 2);
 
-r = terrainValues.terrainColor[0];
-	g = terrainValues.terrainColor[1];
-	b = terrainValues.terrainColor[2];
-	a = terrainValues.terrainOpacity;
+function main() {
+    var $container = $('#container');
+    var width = $container.width();
+    var height = $container.height();
 
+    var renderer = new THREE.WebGLRenderer({ antialias: true });
+    var camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000);
+    var scene = new THREE.Scene();
+    camera.position.z = 600;
+    camera.position.y = -100;
+    renderer.setSize(width, height);
+    $container.append(renderer.domElement);
 
-function draw() {	
-  flying -= terrainValues.speed;
-  var yoff = flying;
-	
-	/*
-			Set vertices at the x and y positions 
-			along the triangle strip going up and down 
-			along the path of the triangle strip
-			
-			In this pattern:
-			 .  .  .
-			/ \/ \/ \
-		 .   .  .  .
-		 
-	*/
-	
-  for (var y = 0; y < rows; y++) {
-    var xoff = 0;
-    for (var x = 0; x < cols; x++) {
-      terrain[x][y] = map(noise(xoff, yoff), 0, 1, -terrainValues.mountainHeight, terrainValues.mountainHeight);
-      xoff += 0.1;
-    }
-    yoff += 0.1;
-  }
+    // create the mesh's material
+    var meshMaterial = new THREE.MeshBasicMaterial({
+        color : 0xffffff,
+        wireframe : true
+    });
+    var geometry = generator.initGeometry(500);
+    geometry.dynamic = true;
+    var mesh = new THREE.Mesh(geometry, meshMaterial);
+    mesh.rotation.x = 2.25;
 
-	
-  //set color stuff
-	background(terrainValues.bgColor);
-	stroke(terrainValues.lineColor);
-	strokeWeight(terrainValues.lineWidth);
-	//noFill();
-	
-  angleMode(DEGREES);
-  rotateX(terrainValues.rotation);
-	
-		
-  translate(-w, -h);
-	
-	fill(terrainValues.terrainColor[0] * 1, terrainValues.terrainColor[1] * 1, terrainValues.terrainColor[2] * 1, (terrainValues.terrainOpacity * 255));
-	
-  for (var y = 0; y < rows - 1; y++) {
-    beginShape(TRIANGLE_STRIP);
-    for (var x = 0; x < cols; x++) {
-      vertex(x * scl, y * scl, terrain[x][y]);
-      vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
-    }
-    endShape();
-  }
+    // add the mesh to the scene
+    scene.add(mesh);
+    scene.add(camera);
+      
+    (function generate() {
+        if (generator.generateNextStep())
+            setTimeout(generate, 10);
+    })();
+  
+    (function rotate() {        
+        mesh.rotation.z += 0.0;  
+        setTimeout(rotate, 60);
+    })();
+
+    (function draw() {        
+        renderer.render(scene, camera);
+        requestAnimationFrame(draw);
+    })();
 }
 
-function windowResized(){
-	cnvs = createCanvas(w, h, WEBGL);
-}
+// height bug fix
+setTimeout(main, 10);

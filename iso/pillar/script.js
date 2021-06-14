@@ -1,14 +1,34 @@
 //color scheme from https://color.adobe.com/Copy-of-Wikipedia-color-theme-9248024/?showPublished=true
 
 let colors = [
-  'rgba(255,255,255, 0.51)',
-  'rgba(255,255,255, 0.615)',
-  'rgba(255,255,255, 0.72)',
-  'rgba(255,255,255, 0.825)',
-  'rgba(255,255,255, 0.93)'
+
+
+'rgba(28,28,30,0.1)',
+'rgba(36,36,38,.15)',
+'rgba(44,44,46,.2)',
+'rgba(54,54,56,.25)',
+'rgba(58,58,60,.3)',
+'rgba(68,68,70,.35)',
+'rgba(72,72,74,.4)',
+'rgba(84,84,86,.45)',
+'rgba(99,99,102,.5)',
+'rgba(108,108,112,.55)',
+'rgba(124,124,128,.6)',
+'rgba(142,142,142,.65)',
+'rgba(142,142,147,.7)',
+'rgba(174,174,178,.75)',
+'rgba(174,174,178,.8)',
+'rgba(188,188,192,.85)',
+'rgba(199,199,204,.85)',
+'rgba(209,209,214,.9)',
+'rgba(216,216,220,.95)',
+'rgba(229,229,234,1)',
+'rgba(235,235,240,1)',
+'rgba(242,242,247,1)',
+'rgba(255,255,255, 1)'
 ];
 let clouds = [];
-let N = 10;
+let N = 80;
 
 function setup() {
   // createCanvas(windowWidth, windowHeight);
@@ -23,7 +43,7 @@ function setup() {
   strokeWeight(1);
   stroke('rgba(255, 255, 255, .614)');
   rectMode(CENTER);
-  // blendMode(SCREEN);
+  blendMode(BLEND);
   // saveFrames('a/iso', 'png', 2, 30);
 }
 
@@ -43,11 +63,11 @@ function windowResized() {
 function Cloud() {
   this.x = random(width);
   this.y = random(height);
-  this.proportion = random(1, 2);
+  this.proportion = random(1, 12);
   this.vx = 0;
   this.vy = random(-.2, -.6);
   this.w = random(50, 100);
-  this.h = random(25, 75);
+  this.h = random(25, 175);
   this.life = random(1000, 1500);
   this.stroke = colors[floor(random(colors.length))];
 

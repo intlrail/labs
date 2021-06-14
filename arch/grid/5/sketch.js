@@ -1,111 +1,136 @@
 let sketch = function(p) {
-  let THE_SEED;
-  let padding = 16;
-  let cutoff = 72;
-  let palette;
-
+  let xdim = 5;
+  let ydim = 20;
+  let size = 10;
+  let vseps;
+  let hseps;
   p.setup = function() {
     p.createCanvas(innerWidth, innerHeight);
-    //p.frameRate(2);
-    THE_SEED = p.floor(p.random(9999999));
-    p.randomSeed(THE_SEED);
-    p.strokeWeight(4);
-    p.rectMode(p.CORNERS);
+    p.noLoop();
+    p.noFill();
 
-    palette = [
-      p.color('#dd6853'),
-      p.color('#0aa2c0'),
-      p.color('#e88b17'),
-      p.color('#f7e868'),
-      p.color('#87c6be'),
-      p.color('#7d6b9f'),
-      p.color('#f7f7f7')
-    ];
-  };
+  }
 
   p.draw = function() {
-    //p.background('#ebebe4');
-    let w = p.random(250, 400);
-    let h = p.random(250, 400);
-    p.translate(p.width / 2, p.height / 2);
-    draw_block(p.createVector(-w / 2, -h / 2), p.createVector(w / 2, h / 2));
-    p.noLoop()
-  };
-
-  function draw_section(v1, v2) {
-    if (v2.x - v1.x < cutoff || v2.y - v1.y < cutoff) {
-      draw_block(v1, v2);
-      return;
-    }
-    let decide = p.random();
-
-    if (decide < 0.5) {
-      draw_block(v1, v2);
-    } else if (decide < 0.95) {
-      split_section(v1, v2);
-    } else {
-      //NOTHING, FOR NOW...
+    p.clear();
+    p.translate(10,10);
+    for (var i = 0; i < 10; i++) {
+      p.push();
+      for (var j = 0; j < 10; j++) {
+        generate_grid(xdim + j, ydim + i);
+        p.strokeWeight(1);
+        p.stroke(0);
+        display(xdim + j, ydim + i);
+        p.strokeWeight(1);
+        p.stroke(255);
+        display(xdim + j, ydim + i);
+        p.translate(150 + (j * size), 0);
+      }
+      p.pop();
+      p.translate(0, 10 + (i * size));
     }
   }
 
-  function draw_block(v1, v2) {
-    if (v2.x - v1.x < cutoff || v2.y - v1.y < cutoff) {
-      draw_rectangle(v1, v2);
-      return;
-    }
-    let decide = p.random();
+  function generate_grid(xd,yd) {
+    vseps = new Array(yd);
+    hseps = new Array(yd - 1);
 
-    if (decide < 0.4) {
-      draw_rectangle(v1, v2);
-      draw_section(p.createVector(v1.x + padding, v1.y + padding), p.createVector(v2.x - padding, v2.y - padding));
-    } else if (decide < 0.95) {
-      split_block(v1, v2);
-    } else {
-      draw_rectangle(v1, v2);
+    for (var i = 0; i < yd; i++) {
+      vseps[i] = new Array(xd - 1);
+      vseps[i].fill(-1);
     }
-  }
 
-  function split_section(v1, v2) {
-    let cut_dir = get_cut_direction(v1, v2);
-    if (cut_dir == 'H') {
-      let pivot = get_cut_pos(v1.y, v2.y);
-      draw_section(v1, p.createVector(v2.x, pivot - padding / 2));
-      draw_section(p.createVector(v1.x, pivot + padding / 2), v2);
-    } else {
-      let pivot = get_cut_pos(v1.x, v2.x);
-      draw_section(v1, p.createVector(pivot - padding / 2, v2.y));
-      draw_section(p.createVector(pivot + padding / 2, v1.y), v2);
+    vseps[0] = randomly_fill_remaining_vseps(vseps[0]);
+
+    for (var i = 0; i < yd - 1; i++) {
+      hseps[i] = genereate_hseps(vseps[i], new Array(xd));
+      vseps[i + 1] = fill_forced_vseps(hseps[i], vseps[i], vseps[i + 1]);
+      vseps[i + 1] = randomly_fill_remaining_vseps(vseps[i + 1]);
     }
   }
 
-  function split_block(v1, v2) {
-    let cut_dir = get_cut_direction(v1, v2);
-    if (cut_dir == 'H') {
-      let pivot = get_cut_pos(v1.y, v2.y);
-      draw_block(v1, p.createVector(v2.x, pivot));
-      draw_block(p.createVector(v1.x, pivot), v2);
-    } else {
-      let pivot = get_cut_pos(v1.x, v2.x);
-      draw_block(v1, p.createVector(pivot, v2.y));
-      draw_block(p.createVector(pivot, v1.y), v2);
+  function display(xd,yd) {
+    p.push();
+    p.rect(0, 0, xd * size, yd * size);
+
+    for (var j = 1; j < xd; j++) {
+      if (vseps[0][j-1] === 1) p.line(j * size, 0, j * size, size);
+    }  
+
+    for (var i = 0; i < yd - 1; i++) {
+      p.translate(0, size);
+      if (hseps[i][0] === 1) p.line(0, 0, size, 0);
+      for (var j = 1; j < xd; j++) {
+        if (vseps[i+1][j-1] === 1) p.line(j * size, 0, j * size, size);
+        if (hseps[i][j] === 1)   p.line(j * size, 0, (j+1) * size, 0)
+      }    
     }
+    p.pop()
   }
 
-  function draw_rectangle(v1, v2) {
-    p.fill(palette[p.floor(p.random(palette.length))]);
-    p.rect(v1.x, v1.y, v2.x, v2.y);
+
+
+  function randomly_fill_remaining_vseps(arr) {
+    for (var i in arr) {
+      if(arr[i] === -1) {
+        arr[i] = flip_coin();
+      }
+    };
+    return arr;
   }
 
-  function get_cut_direction(v1, v2) {
-    return v2.x - v1.x < v2.y - v1.y ? 'H' : 'V';
+  function genereate_hseps(vsep, arr) {
+    arr[0] = flip_coin();
+    for (var i = 1; i < arr.length; i++) {
+      arr[i] = (vsep[i - 1] === 0) ? arr[i - 1] : flip_coin();
+    }
+    return arr;
   }
 
-  function get_cut_pos(p1, p2) {
-    return p.constrain(p.randomGaussian((p1 + p2) / 2, (p2 - p1) / 8), p1 + 20, p2 - 20);
+  function fill_forced_vseps(hsep, last_vsep, arr) {
+    for (var i = 0; i < arr.length; i++) {
+      if (hsep[i] != hsep[i + 1]) {
+        arr[i] = 1;
+      } else if (hsep[i] === 0 && hsep[i + 1] === 0) {
+        arr[i] = last_vsep[i];
+      }
+    }
+    return arr;
   }
 
-  p.keyPressed = function() {
-    if (p.keyCode === 80) p.saveCanvas('grid5_' + THE_SEED, 'png');
-  };
+  function flip_coin() {
+    return p.random() < .6 ? 0:1
+  }
+
+  function display_ascii() {     
+    for (var r = 0; r < ydim - 1; r++) {
+      var s = "|";
+      if (hseps[r][0] === 1) s += "__";
+      else s += "  ";
+
+      for (var i = 0; i < xdim - 1; i++) {
+        if (vseps[r][i] === 1) s += "|";
+        else s += " ";
+        if (hseps[r][i + 1] === 1) s += "__";
+        else s +=  "  ";
+      }
+      s += "|";
+
+      console.log(s);
+    }
+
+    var s = "|__";
+
+    for (var i = 0; i < xdim-1; i++) {
+      if (vseps[ydim - 1][i] === 1) s += "|";
+      else s += " ";
+      s +=  "__";
+    }
+    s += "|"
+
+    console.log(s);
+  }
+
 };
+
 new p5(sketch);

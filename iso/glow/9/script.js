@@ -145,8 +145,8 @@ function reset() {
     });
     ctx.save();
     ctx.translate(w / 2, h / 2);
-    ctx.scale(1, 0.62);
-    ctx.rotate(Math.PI / 4);
+    ctx.scale(1, 0.5);
+    ctx.rotate(45 * Math.PI / 180);
     var d = [],
         f = [],
         n = [];

@@ -436,28 +436,18 @@
   }
 
   var intlrail = [
+  
 {name: 'intlrail',
     colors: ['#1c1c1e', '#242426', '#2c2c2e', '#363638', '#3a3a3c', '#444446',
     '#48484a', '#545456', '#636366', '#6c6c70', '#7c7c80', '#8e8e8e', '#8e8e93',
     '#aeaeb2', '#aeaeb2', '#bcbcc0', '#c7c7cc', '#d1d1d6', '#d8d8dc', '#e5e5ea',
     '#ebebf0', '#f2f2f7'],
-    background: '#000',
-    stroke: '#fff'
+    // background: '#000',
+    stroke: '#2b2b2b'
 }
   ];
 
-  var misc = [
-    {
-      name: 'frozen-rose',
-      colors: ['#29368f', '#e9697b', '#1b164d', '#f7d996'],
-      background: '#f2e8e4',
-    },
-  ];
-  
-
-  const pals = misc.concat(
-    intlrail
-  );
+  const pals = intlrail
 
   var palettes = pals.map((p) => {
     p.size = p.colors.length;
@@ -575,6 +565,7 @@
   let sketch = function(p) {
     let THE_SEED;
 
+<<<<<<< Updated upstream
     const mag = 5;
     const xu = [1 * mag, -0.5 * mag]; // X Unit
     const yu = [1 * mag, 0.5 * mag]; // Y Unit
@@ -586,31 +577,56 @@
       extension_chance: 0.618,
       horizontal_symmetry: false,
       vertical_chance: 0.649
+=======
+    const mag = 7;
+    const xu = [1 * mag, -0.5 * mag]; // X Unit
+    const yu = [1 * mag, 0.5 * mag]; // Y Unit
+    const zu = [0 * mag, -0.5 * mag]; // Z Unit
+
+    const palette = get_palette();
+
+    const generator = new index(90, 90, {
+      simple: false,
+      extension_chance: 0.5,
+      horizontal_symmetry: true,
+      color_mode: 'main',
+      vertical_chance: 0.8649,
+>>>>>>> Stashed changes
     });
 
     const innerApparatusOptions = {
       simple: false,
+<<<<<<< Updated upstream
       extension_chance: 0.8,
       horizontal_symmetry: false,
       vertical_chance: 0.9,
+=======
+      extension_chance: 0.38,
+      horizontal_symmetry: true,
+      vertical_chance: 0.6182,
+>>>>>>> Stashed changes
       color_mode: 'group',
-      colors: palette.colors
+      colors: palette.colors,
     };
 
     let layout;
 
     p.setup = function() {
       p.createCanvas(innerWidth, innerHeight);
-      THE_SEED = p.floor(p.random(9999999));
+      THE_SEED = p.floor(p.random(999999));
       p.randomSeed(THE_SEED);
       p.noFill();
       p.smooth();
       // p.frameRate(1);
       p.noLoop();
-      p.background(palette.background ? palette.background : '#111');
+      // p.background(palette.background ? palette.background : '#fff');
       p.strokeJoin(p.ROUND);
       p.strokeWeight(0.1);
+<<<<<<< Updated upstream
       p.stroke(palette.stroke ? palette.stroke : '#eee');
+=======
+      p.stroke(palette.stroke ? palette.stroke : '#000');
+>>>>>>> Stashed changes
     };
 
     p.draw = function() {
@@ -623,12 +639,12 @@
     };
 
     function reset() {
-      p.background(palette.background ? palette.background : '#111');
+      // p.background(palette.background ? palette.background : '#000');
       layout = get_overlap_graph(generator.generate().flatMap(createGrid));
     }
 
     function displayLayout(depth, colorize) {
-      p.translate(100, 550);
+      p.translate(0, innerHeight * 0.5);
       layout.forEach(i => {
         displayBox(i, depth, colorize);
       });
@@ -759,7 +775,7 @@
             w: cell_w,
             h: cell_h,
             level: 1,
-            filled: false
+            filled: true
           };
           const content = apparatus.map(app => ({
             ...app,
@@ -767,7 +783,7 @@
             y1: app.y1 + cell.y1,
             level: 2,
             filled: true,
-            crossed: app.w < 1.5 && app.h < 1.5 && Math.random() < 0.3,
+            crossed: false.w < 1.5 && app.h < 1.5 && Math.random() < 0.3,
             legend_width: 2 + Math.random() * (app.w - 3)
           }));
 

@@ -6,7 +6,7 @@
   })();
 
   // Terrain stuff.
-  var background = document.getElementById("bgCanvas"),
+  var background = document.getElementById("bkCanvas"),
       bgCtx = background.getContext("2d"),
       width = window.innerWidth,
       height = window.innerHeight;

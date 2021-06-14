@@ -79,7 +79,7 @@ var Generator = function(segmentCount, zScaleStart, zScaleReduction) {
   };
 }
 
-var generator = new Generator(256, 256, 2);
+var generator = new Generator(64, 150, 2);
 
 function main() {
     var $container = $('#container');
@@ -89,8 +89,9 @@ function main() {
     var renderer = new THREE.WebGLRenderer({ antialias: true });
     var camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000);
     var scene = new THREE.Scene();
-    camera.position.z = 600;
-    camera.position.y = -100;
+    camera.position.z = 500;
+    camera.position.y = -80;
+    
     renderer.setSize(width, height);
     $container.append(renderer.domElement);
 
@@ -99,7 +100,7 @@ function main() {
         color : 0xffffff,
         wireframe : true
     });
-    var geometry = generator.initGeometry(500);
+    var geometry = generator.initGeometry(400);
     geometry.dynamic = true;
     var mesh = new THREE.Mesh(geometry, meshMaterial);
     mesh.rotation.x = 2.25;
@@ -110,12 +111,12 @@ function main() {
       
     (function generate() {
         if (generator.generateNextStep())
-            setTimeout(generate, 10);
+            setTimeout(generate, 500);
     })();
   
     (function rotate() {        
-        mesh.rotation.z += 0.0;  
-        setTimeout(rotate, 60);
+        mesh.rotation.z += 0.002;  
+        setTimeout(rotate, 10);
     })();
 
     (function draw() {        
