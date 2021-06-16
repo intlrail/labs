@@ -1,32 +1,49 @@
 let sketch = function(p) {
   let THE_SEED;
-  let padding = 16;
-  let cutoff = 72;
+  let padding = 8;
+  let cutoff = 48;
   let palette;
 
   p.setup = function() {
     p.createCanvas(innerWidth, innerHeight);
-    //p.frameRate(2);
+    // p.frameRate(60);
     THE_SEED = p.floor(p.random(9999999));
     p.randomSeed(THE_SEED);
-    p.strokeWeight(4);
+    p.strokeWeight(3);
     p.rectMode(p.CORNERS);
 
     palette = [
-      p.color('#dd6853'),
-      p.color('#0aa2c0'),
-      p.color('#e88b17'),
-      p.color('#f7e868'),
-      p.color('#87c6be'),
-      p.color('#7d6b9f'),
-      p.color('#f7f7f7')
+    p.color('#1c1c1e'),
+    p.color('#242426'),
+    p.color('#2c2c2e'),
+    p.color('#363638'),
+    p.color('#3a3a3c'),
+    p.color('#444446'),
+    p.color('#48484a'),
+    p.color('#545456'),
+    p.color('#636366'),
+    p.color('#6c6c70'),
+    p.color('#7c7c80'),
+    p.color('#8e8e8e'),
+    p.color('#8e8e93'),
+    p.color('#8e8e93'),
+    p.color('#aeaeb2'),
+    p.color('#aeaeb2'),
+    p.color('#aeaeb2'),
+    p.color('#bcbcc0'),
+    p.color('#c7c7cc'),
+    p.color('#d1d1d6'),
+    p.color('#d8d8dc'),
+    p.color('#e5e5ea'),
+    p.color('#ebebf0'),
+    p.color('#f2f2f7')
     ];
   };
 
   p.draw = function() {
     //p.background('#ebebe4');
-    let w = p.random(250, 400);
-    let h = p.random(250, 400);
+    let w = innerWidth
+    let h = innerHeight
     p.translate(p.width / 2, p.height / 2);
     draw_block(p.createVector(-w / 2, -h / 2), p.createVector(w / 2, h / 2));
     p.noLoop()
